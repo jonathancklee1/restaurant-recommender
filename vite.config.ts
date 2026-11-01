@@ -6,7 +6,9 @@ export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
-  fmt: {},
+  fmt: {
+    ignorePatterns: ["plop-templates/**"],
+  },
   lint: {
     plugins: ["react", "typescript", "oxc"],
     rules: {
