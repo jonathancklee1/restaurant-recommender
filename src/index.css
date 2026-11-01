@@ -68,6 +68,23 @@ p {
   text-wrap: pretty;
 }
 
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  width: 100%;
+}
+
 #root {
   isolation: isolate;
+}
+
+.container {
+  padding: 0 1rem;
+}
+
+main {
+  position: relative;
 }

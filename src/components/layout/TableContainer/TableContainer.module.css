@@ -1,0 +1,19 @@
+.container {
+  display: block;
+}
+
+.table {
+  display: none;
+}
+.mobileList {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .table {
+    display: block;
+  }
+  .mobileList {
+    display: none;
+  }
+}
