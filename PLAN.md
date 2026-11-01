@@ -166,3 +166,4 @@ src/
 - Visit log with history (replaced by the visit counter)
 - Weighting, cooldown, pick history, Accept/Veto
 - Places Autocomplete
+- Mobile map/list view toggle

@@ -11,7 +11,7 @@ function Navbar() {
         <div>
           <div className={styles.leftInnerContainer}>
             <h1 className={styles.title}>Where Tonight?</h1>
-            <Pill>
+            <Pill variant="primary">
               <div className={styles.liveDot}>
                 <span className={styles.pinDot}></span>
                 <span className={styles.pingRing}></span>
