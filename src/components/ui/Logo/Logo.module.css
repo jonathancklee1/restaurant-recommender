@@ -1,0 +1,19 @@
+.container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary);
+  color: var(--text-secondary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  padding: 0.25em;
+}
+
+@media (min-width: 765px) {
+  .container {
+    display: flex;
+  }
+}

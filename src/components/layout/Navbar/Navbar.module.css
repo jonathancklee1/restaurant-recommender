@@ -1,0 +1,85 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  align-items: center;
+  padding: 1em;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-primary);
+}
+.leftInnerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+.leftContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.title {
+  font-size: 1.25rem;
+  text-wrap: nowrap;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  font-weight: normal;
+
+  display: none; /* Hide subtitle on mobile */
+}
+
+.liveDot {
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  background-color: var(--text-secondary);
+  margin-right: 0.6em;
+  position: relative;
+  display: inline-flex;
+}
+
+/* Core static dot */
+.pingDot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-secondary); /* Vibrant Cyan */
+  border-radius: 50%;
+}
+
+/* Animating ring behind the dot */
+.pingRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-secondary); /* Lighter Cyan */
+  border-radius: 50%;
+  opacity: 0.75;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+@media (min-width: 765px) {
+  .subtitle {
+    display: block;
+    margin-top: 0.5em;
+    font-size: 1rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+  .leftInnerContainer {
+    flex-direction: row;
+    gap: 1em;
+  }
+}
