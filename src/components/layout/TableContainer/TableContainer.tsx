@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TableContainer.module.css";
 import Table from "../../ui/table/Table/Table";
 import MobileList from "../../ui/table/MobileList/MobileList";
+import { DUMMY_RESTAURANTS } from "../../../utils/dummyData";
 
 export interface TableContainerProps {
   children?: React.ReactNode;
@@ -18,7 +19,7 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
         <Table />
       </div>
       <div className={styles.mobileList}>
-        <MobileList listItems={[1, 2, 3, 4]} />
+        <MobileList listItems={DUMMY_RESTAURANTS} />
       </div>
     </div>
   );
