@@ -1,0 +1,17 @@
+.container {
+  display: block;
+  padding: 0.3em 1em;
+  border-radius: 30px;
+  width: fit-content;
+  font-weight: semi-bold;
+  font-size: 0.75rem;
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--text-secondary);
+}
+.secondary {
+  background-color: var(--background-accent);
+  color: var(--text-primary);
+}

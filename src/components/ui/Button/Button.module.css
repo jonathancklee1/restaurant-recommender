@@ -1,0 +1,14 @@
+.button {
+  display: block;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease-in-out;
+  text-wrap: nowrap;
+  font-weight: bold;
+}

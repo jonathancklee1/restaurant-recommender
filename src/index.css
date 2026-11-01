@@ -10,9 +10,20 @@
 }
 
 :root {
+  --primary: #a33900;
+  --primary-hover: #ea580c;
+  --background-primary: #ffffff;
+  --background-secondary: #f9efe8;
+  --background-accent: #f2e0c8;
+  --text-primary: #1c1917;
+  --text-secondary: #ffffff;
+
+  --border-radius: 8px;
+  --border-primary: #ffb599;
+
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: none;
@@ -20,6 +31,11 @@
 
 body {
   min-height: 100svh;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img,
