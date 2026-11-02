@@ -88,11 +88,12 @@
 }
 .commentsButton {
   display: flex;
-  padding: 0.75em;
+
   background: var(--background-primary);
   color: var(--text-primary);
   &:hover {
     text-decoration: underline;
+    background: var(--background-primary);
   }
 }
 .mapButton {

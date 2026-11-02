@@ -16,7 +16,7 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
         TABLE FILTERS
       </div>
       <div className={styles.table}>
-        <Table />
+        <Table listItems={DUMMY_RESTAURANTS} />
       </div>
       <div className={styles.mobileList}>
         <MobileList listItems={DUMMY_RESTAURANTS} />

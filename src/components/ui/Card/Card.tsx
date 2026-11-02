@@ -6,6 +6,7 @@ import Pill from "../Pill/Pill";
 import { Bookmark, ChevronDown, MapPinned } from "lucide-react";
 import Button from "../Button/Button";
 import type { RestaurantType } from "../../../utils/types";
+import { getDollarSigns } from "../../../utils/helpers/getDollarSigns";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -26,7 +27,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
           <div>
             <p className={styles.name}>{name}</p>
             <span className={styles.details}>
-              {cuisine} • {suburb} • {"$".repeat(price)}
+              {cuisine} • {suburb} • {getDollarSigns(price)}
             </span>
           </div>
           <Bookmark

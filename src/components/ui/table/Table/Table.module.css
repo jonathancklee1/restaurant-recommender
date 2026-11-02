@@ -1,3 +1,98 @@
 .container {
   display: block;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--border-radius);
+  margin-top: 1em;
+  thead,
+  tbody tr th,
+  th {
+    padding: 1em;
+  }
+  td,
+  th {
+    width: 1%;
+    white-space: nowrap;
+  }
+  .nameCell {
+    min-width: 10em;
+    width: 100%;
+    white-space: normal;
+  }
+  .commentsCell {
+    min-width: 15em;
+    width: 100%;
+    white-space: normal;
+  }
+  th {
+    background-color: var(--background-secondary);
+    text-transform: uppercase;
+    font-size: 0.825rem;
+    text-align: left;
+  }
+  td {
+    padding: 0.5em 1em;
+  } /* 2. Style the table cells */
+  th:last-child,
+  td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    background-color: var(--background-primary);
+  }
+
+  thead th:last-child {
+    z-index: 3;
+    background-color: var(--background-secondary);
+  }
+
+  tr:hover {
+    background-color: var(--background-secondary);
+    .nameCell {
+      color: var(--primary);
+      border-left: 2px solid var(--primary);
+    }
+    th:last-child,
+    td:last-child {
+      background-color: var(--background-secondary);
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5em;
+  > * {
+    margin: 0.25em;
+    flex-shrink: 0;
+    cursor: pointer;
+    &:hover {
+      stroke: var(--primary);
+    }
+  }
+}
+
+.nameCell {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.comments {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
