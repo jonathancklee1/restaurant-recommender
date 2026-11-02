@@ -1,13 +1,16 @@
 .nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   gap: 1em;
   align-items: center;
-  padding: 1em;
+  padding-block: 0.8em;
   background-color: var(--background-secondary);
   color: var(--text-primary);
   border-bottom: 1px solid var(--border-primary);
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 .leftInnerContainer {
   display: flex;
