@@ -10,6 +10,7 @@
   margin-top: 1em;
   thead,
   tbody tr th,
+  tfoot,
   th {
     padding: 1em;
   }
@@ -34,11 +35,15 @@
     font-size: 0.825rem;
     text-align: left;
   }
+  tfoot td {
+    background: var(--background-secondary);
+    padding: 1em;
+  }
   td {
     padding: 0.5em 1em;
-  } /* 2. Style the table cells */
-  th:last-child,
-  td:last-child {
+  }
+  thead th:last-child,
+  tbody td:last-child {
     position: sticky;
     right: 0;
     z-index: 2;
@@ -50,7 +55,7 @@
     background-color: var(--background-secondary);
   }
 
-  tr:hover {
+  tbody tr:hover {
     background-color: var(--background-secondary);
     .nameCell {
       color: var(--primary);
@@ -95,4 +100,13 @@
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+.totalCell {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.priceCell {
+  font-weight: bold;
 }

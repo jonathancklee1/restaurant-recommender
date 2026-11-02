@@ -39,12 +39,13 @@ export const Table = ({ className = "", listItems }: TableProps) => {
                 <Pill variant="secondary">{restaurant.cuisine}</Pill>
               </td>
               <td className={styles.suburbCell}>{restaurant.suburb}</td>
-              <td className={styles.ratingCell}>
-                <Rating ratingNum={restaurant.rating} />
-              </td>
+
               <td className={styles.priceCell}>{getDollarSigns(restaurant.price)}</td>
               <td className={styles.visitsCell}>
                 <VisitsCounter count={restaurant.visits} />
+              </td>
+              <td className={styles.ratingCell}>
+                <Rating ratingNum={restaurant.rating} />
               </td>
               <td className={styles.commentsCell}>
                 <div className={styles.comments}>{restaurant.comments}</div>
@@ -59,6 +60,13 @@ export const Table = ({ className = "", listItems }: TableProps) => {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={10} className={styles.totalCell}>
+              Showing {listItems.length} restaurants in Sydney
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
