@@ -1,0 +1,50 @@
+.container {
+  margin: auto 0 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 85svh;
+  border: none;
+  border-radius: 16px 16px 0 0;
+  padding: 1.5em 1rem 1rem;
+  background: var(--background-primary);
+  color: var(--text-primary);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 0.4);
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin: 1.25em 0 0.5em;
+  }
+}
+
+.pillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  > button {
+    min-width: 0;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid var(--background-accent);
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5em 0;
+}
