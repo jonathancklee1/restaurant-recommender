@@ -12,23 +12,11 @@
   &::backdrop {
     background: rgb(0 0 0 / 0.4);
   }
-  h2 {
-    font-size: 1.2rem;
-  }
-  h3 {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    margin: 1.25em 0 0.5em;
-  }
 }
 
-.pillGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  > button {
-    min-width: 0;
-  }
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 1em;
 }
 
 .footer {

@@ -56,3 +56,91 @@
   display: grid;
   place-items: center;
 }
+
+/* Desktop-only expanded filters panel */
+.panel {
+  display: none;
+  margin-top: 1.25em;
+  padding: 1.25em 1.5em;
+  border: 1px solid var(--background-accent);
+  border-radius: var(--border-radius);
+  background: var(--background-primary);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Collapses by animating the row from 1fr to 0fr; the child must be allowed to shrink */
+.filtersContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+  > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  &.collapsed {
+    grid-template-rows: 0fr;
+  }
+}
+
+/* Spacing lives inside the collapsing area so no gap remains when closed */
+.filterOptions {
+  padding-top: 1em;
+}
+
+/* Desktop: search and status pills on one row, collapsible panel, no sheet button */
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5em;
+  }
+  .searchContainer {
+    flex: 1;
+    max-width: 28rem;
+  }
+  .additionalContainer {
+    flex: 1;
+    margin-top: 0;
+    > button {
+      display: none;
+    }
+  }
+  .panel {
+    display: block;
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+}
