@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--primary);
+  cursor: pointer;
+}

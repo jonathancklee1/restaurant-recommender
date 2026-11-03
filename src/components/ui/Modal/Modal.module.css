@@ -1,8 +1,10 @@
 .container {
-  display: flex;
   margin: auto;
   border: none;
   border-radius: var(--border-radius);
+  &[open] {
+    display: flex;
+  }
   form {
     padding: 20px;
     border-radius: var(--border-radius);
@@ -18,4 +20,14 @@
       margin-bottom: 0.35em;
     }
   }
+}
+
+.closeButton {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
 }

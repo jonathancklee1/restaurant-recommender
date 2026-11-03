@@ -16,7 +16,7 @@ export interface RestaurantType {
   cuisine: string;
   suburb: string;
   rating?: number; // 1-5
-  price: Price;
+  price: PriceRangeType;
   visits: number;
   comments?: string;
   lat?: number;
@@ -24,3 +24,4 @@ export interface RestaurantType {
   addedAt?: string; // YYYY-MM-DD
   lastVisitedAt?: string;
 }
+export type PriceRangeType = "$" | "$$" | "$$$" | "$$$$";

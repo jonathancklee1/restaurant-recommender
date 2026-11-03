@@ -1,29 +1,53 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./PriceRange.module.css";
-
-const TIERS = ["$", "$$", "$$$", "$$$$"] as const;
-type Tier = (typeof TIERS)[number];
+import type { PriceRangeType } from "../../../../utils/types";
 
 export interface PriceRangeProps {
+  children?: React.ReactNode;
   className?: string;
+  initialPrice?: PriceRangeType;
 }
 
-/** Segmented control for picking a price tier. */
-export const PriceRange = ({ className = "" }: PriceRangeProps) => {
-  const [selected, setSelected] = useState<Tier>("$");
+export const PriceRange = ({ className = "", initialPrice = "$" }: PriceRangeProps) => {
+  const [selected, setSelected] = useState<PriceRangeType>(initialPrice);
+
+  const handleClick = (value: PriceRangeType) => {
+    setSelected(value);
+  };
 
   return (
     <div className={`${styles.container} ${className}`}>
-      {TIERS.map((tier) => (
-        <button
-          key={tier}
-          type="button"
-          className={`${styles.button} ${selected === tier ? styles.selected : ""}`}
-          onClick={() => setSelected(tier)}
-        >
-          {tier}
-        </button>
-      ))}
+      <button
+        type="button"
+        className={`${styles.button} ${selected === "$" ? styles.selected : ""}`}
+        onClick={() => handleClick("$")}
+      >
+        $
+      </button>
+      <button
+        type="button"
+        className={`${styles.button} ${selected === "$$" ? styles.selected : ""} ${className}`}
+        value={"$$"}
+        onClick={() => handleClick("$$")}
+      >
+        $$
+      </button>
+      <button
+        type="button"
+        className={`${styles.button} ${selected === "$$$" ? styles.selected : ""} ${className}`}
+        value={"$$$"}
+        onClick={() => handleClick("$$$")}
+      >
+        $$$
+      </button>
+      <button
+        type="button"
+        className={`${styles.button} ${selected === "$$$$" ? styles.selected : ""} ${className}`}
+        value={"$$$$"}
+        onClick={() => handleClick("$$$$")}
+      >
+        $$$$
+      </button>
     </div>
   );
 };
