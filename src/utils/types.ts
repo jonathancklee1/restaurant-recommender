@@ -19,4 +19,8 @@ export interface RestaurantType {
   price: Price;
   visits: number;
   comments?: string;
+  lat?: number;
+  lng?: number;
+  addedAt?: string; // YYYY-MM-DD
+  lastVisitedAt?: string;
 }
