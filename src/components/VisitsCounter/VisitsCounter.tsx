@@ -4,8 +4,8 @@ import styles from "./VisitsCounter.module.css";
 export interface VisitsCounterProps {
   children?: React.ReactNode;
   className?: string;
-  count: number;
-  setCount?: Dispatch<React.SetStateAction<number>>;
+  count?: number;
+  setCount?: Dispatch<React.SetStateAction<number | undefined>>;
 }
 
 export const VisitsCounter = ({ className = "", count, setCount }: VisitsCounterProps) => {
@@ -14,14 +14,14 @@ export const VisitsCounter = ({ className = "", count, setCount }: VisitsCounter
       <p>Visits </p>
       <div className={styles.counterContainer}>
         <button
-          onClick={() => setCount && setCount((prev) => (prev !== 0 ? prev - 1 : prev))}
+          onClick={() => setCount && setCount((prev) => (prev && prev !== 0 ? prev - 1 : prev))}
           className={styles.counterButton}
         >
           -
         </button>
-        <span className={styles.counterNumber}>{count}</span>
+        <span className={styles.counterNumber}>{count ?? 0}</span>
         <button
-          onClick={() => setCount && setCount((prev) => prev + 1)}
+          onClick={() => setCount && setCount((prev) => prev && prev + 1)}
           className={styles.counterButton}
         >
           +

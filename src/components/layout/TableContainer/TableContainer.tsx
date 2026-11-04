@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./TableContainer.module.css";
 import Table from "../../ui/table/Table/Table";
 import MobileList from "../../ui/table/MobileList/MobileList";
-import { DUMMY_RESTAURANTS } from "../../../utils/dummyData";
 import TableFilters from "../TableFilters/TableFilters";
+import { RestaurantContext } from "../../../context/RestaurantProvider";
 
 export interface TableContainerProps {
   children?: React.ReactNode;
@@ -11,16 +11,19 @@ export interface TableContainerProps {
 }
 
 export const TableContainer = ({ className = "" }: TableContainerProps) => {
+  const { state } = useContext(RestaurantContext);
   return (
     <div className={`container ${styles.container} ${className}`}>
       <div className={styles.filtersContainer}>
-        <TableFilters cuisines={[...new Set(DUMMY_RESTAURANTS.map((r) => r.cuisine))]} />
+        <TableFilters
+          cuisines={[...new Set(state.map((r) => r.cuisine).filter((c) => c !== undefined))]}
+        />
       </div>
       <div className={styles.table}>
-        <Table listItems={DUMMY_RESTAURANTS} />
+        <Table listItems={state} />
       </div>
       <div className={styles.mobileList}>
-        <MobileList listItems={DUMMY_RESTAURANTS} />
+        <MobileList listItems={state} />
       </div>
     </div>
   );

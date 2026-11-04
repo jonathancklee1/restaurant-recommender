@@ -1,4 +1,4 @@
-import type { Price, RestaurantFilters } from "./types";
+import type { Price, RestaurantFilters, RestaurantType } from "./types";
 
 export const PRICE_OPTIONS: Price[] = [1, 2, 3, 4];
 
@@ -9,7 +9,7 @@ export const CUISINE_PREVIEW_COUNT = 6;
 
 export const EMPTY_FILTERS: RestaurantFilters = { prices: [], minRating: null, cuisines: [] };
 
-export const COLUMN_HEADERS = [
+export const COLUMN_HEADERS: string[] = [
   "Name",
   "Cuisine",
   "Suburb",
@@ -18,4 +18,22 @@ export const COLUMN_HEADERS = [
   "Rating",
   "Comments",
   "Actions",
+];
+
+export const INITIAL_RESTAURANTS: RestaurantType[] = [
+  {
+    id: "1",
+    name: "Golden Lotus",
+    imageUrl: "https://picsum.photos/seed/golden-lotus/400/400",
+    cuisine: "Cantonese",
+    suburb: "Haymarket",
+    rating: 4,
+    price: "$$",
+    visits: 2,
+    comments: "Yum cha trolleys on weekends. Get the prawn cheung fun.",
+    lat: -33.8792,
+    lng: 151.2045,
+    addedAt: "2026-10-12",
+    lastVisitedAt: "2026-11-01",
+  },
 ];

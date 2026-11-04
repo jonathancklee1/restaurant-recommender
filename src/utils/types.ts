@@ -11,14 +11,15 @@ export interface RestaurantFilters {
 /** A restaurant row in the table. */
 export interface RestaurantType {
   id: string;
-  name: string;
-  imageUrl: string;
-  cuisine: string;
-  suburb: string;
+  name?: string;
+  imageUrl?: string;
+  cuisine?: string;
+  suburb?: string;
   rating?: number; // 1-5
-  price: PriceRangeType;
-  visits: number;
+  price?: PriceRangeType;
+  visits?: number;
   comments?: string;
+  address?: string;
   lat?: number;
   lng?: number;
   addedAt?: string; // YYYY-MM-DD

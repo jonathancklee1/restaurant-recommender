@@ -21,7 +21,12 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   const [visitCount, setVisitCount] = useState(visits);
   return (
     <div className={`${styles.container} ${className}`}>
-      <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
+      {imageUrl ? (
+        <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
+      ) : (
+        <></>
+      )}
+
       <div className={styles.content}>
         <div className={styles.detailsContainer}>
           <div>
