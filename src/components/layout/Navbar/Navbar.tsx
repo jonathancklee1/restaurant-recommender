@@ -3,8 +3,11 @@ import Logo from "../../ui/Logo/Logo";
 import { modalId } from "../../ui/Modal/Modal";
 import Pill from "../../ui/Pill/Pill";
 import styles from "./Navbar.module.css";
+import { useContext } from "react";
+import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 
 function Navbar() {
+  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   return (
     <nav className={`container ${styles.nav}`}>
       <div className={styles.leftContainer}>
@@ -24,7 +27,12 @@ function Navbar() {
         </div>
       </div>
       <div>
-        <Button type="button" command="show-modal" commandfor={modalId}>
+        <Button
+          type="button"
+          command="show-modal"
+          commandfor={modalId}
+          onClick={() => setSelectedRestaurant(null)}
+        >
           Add Restaurant
         </Button>
       </div>

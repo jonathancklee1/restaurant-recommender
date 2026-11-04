@@ -6,13 +6,19 @@ export interface PriceRangeProps {
   children?: React.ReactNode;
   className?: string;
   initialPrice?: PriceRangeType;
+  changePrice: (price: PriceRangeType) => void;
 }
 
-export const PriceRange = ({ className = "", initialPrice = "$" }: PriceRangeProps) => {
+export const PriceRange = ({
+  className = "",
+  initialPrice = "$",
+  changePrice,
+}: PriceRangeProps) => {
   const [selected, setSelected] = useState<PriceRangeType>(initialPrice);
 
   const handleClick = (value: PriceRangeType) => {
     setSelected(value);
+    changePrice(value);
   };
 
   return (

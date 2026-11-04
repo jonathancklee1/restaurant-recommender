@@ -4,6 +4,8 @@ import Table from "../../ui/table/Table/Table";
 import MobileList from "../../ui/table/MobileList/MobileList";
 import TableFilters from "../TableFilters/TableFilters";
 import { RestaurantContext } from "../../../context/RestaurantProvider";
+import Modal from "../../ui/Modal/Modal";
+import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 
 export interface TableContainerProps {
   children?: React.ReactNode;
@@ -12,6 +14,8 @@ export interface TableContainerProps {
 
 export const TableContainer = ({ className = "" }: TableContainerProps) => {
   const { state } = useContext(RestaurantContext);
+  const { selectedRestaurant } = useContext(SelectedRestaurantContext);
+  console.log(selectedRestaurant);
   return (
     <div className={`container ${styles.container} ${className}`}>
       <div className={styles.filtersContainer}>
@@ -25,6 +29,7 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
       <div className={styles.mobileList}>
         <MobileList listItems={state} />
       </div>
+      <Modal initialPlace={selectedRestaurant} />
     </div>
   );
 };

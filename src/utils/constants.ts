@@ -26,7 +26,7 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
     name: "Golden Lotus",
     imageUrl: "https://picsum.photos/seed/golden-lotus/400/400",
     cuisine: "Cantonese",
-    suburb: "Haymarket",
+    address: "12 Dixon St, Haymarket NSW 2000",
     rating: 4,
     price: "$$",
     visits: 2,

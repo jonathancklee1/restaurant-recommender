@@ -1,17 +1,18 @@
 import Navbar from "./components/layout/Navbar/Navbar";
 import TableContainer from "./components/layout/TableContainer/TableContainer";
-import Modal from "./components/ui/Modal/Modal";
 import { RestaurantProvider } from "./context/RestaurantProvider";
+import { SelectedRestaurantProvider } from "./context/SelectedRestaurantProvider";
 
 function App() {
   return (
     <>
       <RestaurantProvider>
-        <main>
-          <Navbar />
-          <TableContainer />
-          <Modal />
-        </main>
+        <SelectedRestaurantProvider>
+          <main>
+            <Navbar />
+            <TableContainer />
+          </main>
+        </SelectedRestaurantProvider>
       </RestaurantProvider>
     </>
   );

@@ -14,7 +14,6 @@ export interface RestaurantType {
   name?: string;
   imageUrl?: string;
   cuisine?: string;
-  suburb?: string;
   rating?: number; // 1-5
   price?: PriceRangeType;
   visits?: number;

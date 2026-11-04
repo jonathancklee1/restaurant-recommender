@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MapPin, Pencil, Trash } from "lucide-react";
 import styles from "./Table.module.css";
 import { COLUMN_HEADERS } from "../../../../utils/constants";
@@ -8,6 +8,8 @@ import Rating from "../../Rating/Rating";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
 import Button from "../../Button/Button";
 import { modalId } from "../../Modal/Modal";
+import { getSuburb } from "../../../../utils/helpers/getSuburb";
+import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -16,6 +18,7 @@ export interface TableProps {
 }
 
 export const Table = ({ className = "", listItems }: TableProps) => {
+  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   return (
     <div className={`${styles.container} ${className}`}>
       <table className={styles.table}>
@@ -39,7 +42,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
               <td className={styles.pillCell}>
                 <Pill variant="secondary">{restaurant.cuisine}</Pill>
               </td>
-              <td className={styles.suburbCell}>{restaurant.suburb}</td>
+              <td className={styles.suburbCell}>{getSuburb(restaurant.address)}</td>
 
               <td className={styles.priceCell}>{restaurant.price}</td>
               <td className={styles.visitsCell}>
@@ -56,7 +59,12 @@ export const Table = ({ className = "", listItems }: TableProps) => {
                   <Button>
                     <MapPin />
                   </Button>
-                  <Button type="button" command="show-modal" commandfor={modalId}>
+                  <Button
+                    type="button"
+                    command="show-modal"
+                    commandfor={modalId}
+                    onClick={() => setSelectedRestaurant(restaurant)}
+                  >
                     <Pencil />
                   </Button>
                   <Button>
