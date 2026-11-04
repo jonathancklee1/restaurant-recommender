@@ -71,11 +71,16 @@
 .actions {
   display: flex;
   gap: 0.5em;
-  > * {
-    margin: 0.25em;
+  width: 8em;
+  > button {
+    background: none;
+    padding: 0.5em;
+    color: var(--text-primary);
     flex-shrink: 0;
     cursor: pointer;
     &:hover {
+      color: var(--text-secondary);
+
       stroke: var(--primary);
     }
   }

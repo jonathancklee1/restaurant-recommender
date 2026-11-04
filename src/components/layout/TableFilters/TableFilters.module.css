@@ -1,0 +1,146 @@
+.container {
+  display: block;
+}
+.searchContainer {
+  display: flex;
+  gap: 1em;
+
+  input {
+    width: 100%;
+    border: none;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    border-radius: 40px;
+    padding: 0.75em 2.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  search {
+    width: 100%;
+    position: relative;
+  }
+
+  .searchIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.7em;
+  }
+}
+.pillsContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.additionalContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  > button {
+    position: relative;
+    aspect-ratio: 1/1;
+    padding: 0.8em;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -0.4em;
+  right: -0.4em;
+  min-width: 1.4em;
+  height: 1.4em;
+  border-radius: 999px;
+  background: var(--text-primary);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  display: grid;
+  place-items: center;
+}
+
+/* Desktop-only expanded filters panel */
+.panel {
+  display: none;
+  margin-top: 1.25em;
+  padding: 1.25em 1.5em;
+  border: 1px solid var(--background-accent);
+  border-radius: var(--border-radius);
+  background: var(--background-primary);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Collapses by animating the row from 1fr to 0fr; the child must be allowed to shrink */
+.filtersContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+  > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  &.collapsed {
+    grid-template-rows: 0fr;
+  }
+}
+
+/* Spacing lives inside the collapsing area so no gap remains when closed */
+.filterOptions {
+  padding-top: 1em;
+}
+
+/* Desktop: search and status pills on one row, collapsible panel, no sheet button */
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5em;
+  }
+  .searchContainer {
+    flex: 1;
+    max-width: 28rem;
+  }
+  .additionalContainer {
+    flex: 1;
+    margin-top: 0;
+    > button {
+      display: none;
+    }
+  }
+  .panel {
+    display: block;
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,33 @@
+.container {
+  margin: auto;
+  border: none;
+  border-radius: var(--border-radius);
+  &[open] {
+    display: flex;
+  }
+  form {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.35em;
+    }
+  }
+}
+
+.closeButton {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+  border-radius: var(--border-radius);
+  padding: 0.5em;
+  border: none;
+  background: var(--background-secondary);
+  width: 100%;
+  .button {
+    width: 100%;
+    padding: 0.25em;
+    border-radius: var(--border-radius);
+    border: none;
+    background: var(--background-secondary);
+    cursor: pointer;
+    &.selected {
+      background: var(--primary);
+      color: var(--text-secondary);
+    }
+  }
+}

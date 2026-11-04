@@ -1,0 +1,8 @@
+.container {
+  display: block;
+  border-radius: var(--border-radius);
+  padding: 0.5em 1em;
+  border: none;
+  background: var(--background-secondary);
+  width: 100%;
+}

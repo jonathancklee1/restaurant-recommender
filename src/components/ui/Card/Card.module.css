@@ -33,7 +33,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-  background-color: #f2f2f2;
+  background-color: var(--background-muted);
   padding: 0.5em 1em;
   border-radius: 8px;
   width: fit-content;
@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.5em;
+  gap: 1em;
   border-radius: 8px;
   width: 100%;
   > * {
@@ -96,9 +96,16 @@
     background: var(--background-primary);
   }
 }
-.mapButton {
+.actionButton {
   display: flex;
   padding: 0.75em;
+}
+.buttonGroup {
+  display: flex;
+  gap: 0.5em;
+  width: fit-content;
+  align-items: center;
+  margin-right: auto;
 }
 
 /* Grid rows animate 0fr -> 1fr, so the card grows smoothly with the comments. */

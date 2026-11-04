@@ -5,8 +5,9 @@ import { COLUMN_HEADERS } from "../../../../utils/constants";
 import type { RestaurantType } from "../../../../utils/types";
 import Pill from "../../Pill/Pill";
 import Rating from "../../Rating/Rating";
-import { getDollarSigns } from "../../../../utils/helpers/getDollarSigns";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
+import Button from "../../Button/Button";
+import { modalId } from "../../Modal/Modal";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -40,7 +41,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
               </td>
               <td className={styles.suburbCell}>{restaurant.suburb}</td>
 
-              <td className={styles.priceCell}>{getDollarSigns(restaurant.price)}</td>
+              <td className={styles.priceCell}>{restaurant.price}</td>
               <td className={styles.visitsCell}>
                 <VisitsCounter count={restaurant.visits} />
               </td>
@@ -52,9 +53,15 @@ export const Table = ({ className = "", listItems }: TableProps) => {
               </td>
               <td className={styles.actionCell}>
                 <div className={styles.actions}>
-                  <MapPin />
-                  <Pencil />
-                  <Trash />
+                  <Button>
+                    <MapPin />
+                  </Button>
+                  <Button type="button" command="show-modal" commandfor={modalId}>
+                    <Pencil />
+                  </Button>
+                  <Button>
+                    <Trash />
+                  </Button>
                 </div>
               </td>
             </tr>
