@@ -3,10 +3,10 @@ import styles from "./Card.module.css";
 import Rating from "../Rating/Rating";
 import VisitsCounter from "../../VisitsCounter/VisitsCounter";
 import Pill from "../Pill/Pill";
-import { Bookmark, ChevronDown, MapPinned } from "lucide-react";
+import { Bookmark, ChevronDown, MapPinned, Pencil, Trash } from "lucide-react";
 import Button from "../Button/Button";
 import type { RestaurantType } from "../../../utils/types";
-import { getDollarSigns } from "../../../utils/helpers/getDollarSigns";
+import { modalId } from "../Modal/Modal";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -27,7 +27,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
           <div>
             <p className={styles.name}>{name}</p>
             <span className={styles.details}>
-              {cuisine} • {suburb} • {getDollarSigns(price)}
+              {cuisine} • {suburb} • {price}
             </span>
           </div>
           <Bookmark
@@ -61,9 +61,22 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             {rating !== undefined && <Rating ratingNum={rating} />}
             <VisitsCounter count={visitCount} setCount={setVisitCount} />
           </div>
-          <Button className={styles.mapButton}>
-            <MapPinned />
-          </Button>
+          <div className={styles.buttonGroup}>
+            <Button className={styles.actionButton}>
+              <MapPinned />
+            </Button>
+            <Button
+              className={styles.actionButton}
+              type="button"
+              command="show-modal"
+              commandfor={modalId}
+            >
+              <Pencil />
+            </Button>
+            <Button className={styles.actionButton}>
+              <Trash />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

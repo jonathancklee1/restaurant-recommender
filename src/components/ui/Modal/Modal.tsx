@@ -6,6 +6,7 @@ import RatingInput from "../form/RatingInput/RatingInput";
 import TextArea from "../form/TextArea/TextArea";
 import { X } from "lucide-react";
 import type { RestaurantType } from "../../../utils/types";
+import { useRef, type MouseEvent } from "react";
 
 export interface ModalProps {
   className?: string;
@@ -13,9 +14,23 @@ export interface ModalProps {
 }
 export const modalId = "restaurant-modal";
 export const Modal = ({ className = "", initialPlace }: ModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const closeModal = () => dialogRef.current?.close();
+
+  const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
   return (
     <>
-      <dialog id={modalId} className={styles.container + " " + className}>
+      <dialog
+        id={modalId}
+        className={styles.container + " " + className}
+        ref={dialogRef}
+        onClick={(e) => handleBackdropClick(e)}
+      >
         <button type="button" command="close" commandfor={modalId} className={styles.closeButton}>
           <X />
         </button>
@@ -25,7 +40,11 @@ export const Modal = ({ className = "", initialPlace }: ModalProps) => {
           }}
         >
           <h2>{initialPlace ? "Edit" : "Add"} Place</h2>
-          <p>Save a new restaurant to your Sydney wishlist</p>
+          <p>
+            {initialPlace
+              ? "Edit details of your saved restaurant"
+              : "Save a new restaurant to your Sydney wishlist"}
+          </p>
 
           <div>
             <label htmlFor="name">Restaurant Name</label>

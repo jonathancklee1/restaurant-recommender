@@ -3,7 +3,6 @@ import styles from "./FilterOptions.module.css";
 import FilterPill from "../FilterPill/FilterPill";
 import CuisineFilter from "../CuisineFilter/CuisineFilter";
 import { MIN_RATING_OPTIONS, PRICE_OPTIONS } from "../../../utils/constants";
-import { getDollarSigns } from "../../../utils/helpers/getDollarSigns";
 import { toggleItem } from "../../../utils/helpers/toggleItem";
 import type { RestaurantFilters } from "../../../utils/types";
 
@@ -34,7 +33,7 @@ export const FilterOptions = ({
               selected={filters.prices.includes(price)}
               onClick={() => onChange({ ...filters, prices: toggleItem(filters.prices, price) })}
             >
-              {getDollarSigns(price)}
+              {"$".repeat(price)}
             </FilterPill>
           ))}
         </div>
