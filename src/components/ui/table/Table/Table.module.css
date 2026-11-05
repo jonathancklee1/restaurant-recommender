@@ -55,6 +55,12 @@
     background-color: var(--background-secondary);
   }
 
+  tbody .emptyRow td {
+    position: static;
+    text-align: center;
+    padding: 1em;
+  }
+
   tbody tr:hover {
     background-color: var(--background-secondary);
     .nameCell {
@@ -105,6 +111,24 @@
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: 2.5rem 1rem;
+  border: 2px dashed var(--border-primary);
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  font-weight: 600;
+}
+
+.emptyIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary);
 }
 
 .totalCell {

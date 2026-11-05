@@ -5,5 +5,25 @@
   gap: 1em;
   justify-content: center;
   padding-block: 2rem;
-  width: "100%";
+  width: 100%;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  padding: 2.5rem 1rem;
+  border: 2px dashed var(--border-primary);
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  font-weight: 600;
+  list-style: none;
+}
+
+.emptyIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary);
 }

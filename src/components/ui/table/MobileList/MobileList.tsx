@@ -1,4 +1,5 @@
 import React from "react";
+import { Utensils } from "lucide-react";
 import styles from "./MobileList.module.css";
 import Card from "../../Card/Card";
 import type { RestaurantType } from "../../../../utils/types";
@@ -12,6 +13,12 @@ export interface MobileListProps {
 export const MobileList = ({ className = "", listItems }: MobileListProps) => {
   return (
     <ul className={`${styles.container} ${className}`}>
+      {listItems.length === 0 && (
+        <li className={styles.empty}>
+          <Utensils className={styles.emptyIcon} />
+          <span>No Restaurants</span>
+        </li>
+      )}
       {listItems.map((restaurant) => (
         <li key={restaurant.id}>
           <Card restaurant={restaurant} />

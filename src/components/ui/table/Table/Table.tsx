@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { MapPin, Pencil, Trash } from "lucide-react";
+import { MapPin, Pencil, Trash, Utensils } from "lucide-react";
 import styles from "./Table.module.css";
 import { COLUMN_HEADERS } from "../../../../utils/constants";
 import type { RestaurantType } from "../../../../utils/types";
@@ -10,6 +10,7 @@ import Button from "../../Button/Button";
 import { modalId } from "../../Modal/Modal";
 import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
+import { RestaurantContext } from "../../../../context/RestaurantProvider";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -19,6 +20,11 @@ export interface TableProps {
 
 export const Table = ({ className = "", listItems }: TableProps) => {
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+  const { dispatch } = useContext(RestaurantContext);
+
+  function handleRemoveRestaurant(id: string) {
+    dispatch(["REMOVE_RESTAURANT", id]);
+  }
   return (
     <div className={`${styles.container} ${className}`}>
       <table className={styles.table}>
@@ -34,6 +40,16 @@ export const Table = ({ className = "", listItems }: TableProps) => {
           </tr>
         </thead>
         <tbody>
+          {listItems.length === 0 && (
+            <tr className={styles.emptyRow}>
+              <td colSpan={COLUMN_HEADERS.length}>
+                <div className={styles.empty}>
+                  <Utensils className={styles.emptyIcon} />
+                  <span>No Restaurants</span>
+                </div>
+              </td>
+            </tr>
+          )}
           {listItems.map((restaurant) => (
             <tr key={restaurant.id}>
               <td className={styles.nameCell}>
@@ -46,7 +62,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
 
               <td className={styles.priceCell}>{restaurant.price}</td>
               <td className={styles.visitsCell}>
-                <VisitsCounter count={restaurant.visits} />
+                <VisitsCounter count={restaurant.visits} visitId={restaurant.id} />
               </td>
               <td className={styles.ratingCell}>
                 <Rating ratingNum={restaurant.rating} />
@@ -67,7 +83,11 @@ export const Table = ({ className = "", listItems }: TableProps) => {
                   >
                     <Pencil />
                   </Button>
-                  <Button>
+                  <Button
+                    onClick={() => {
+                      handleRemoveRestaurant(restaurant.id);
+                    }}
+                  >
                     <Trash />
                   </Button>
                 </div>
@@ -77,7 +97,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={10} className={styles.totalCell}>
+            <td colSpan={COLUMN_HEADERS.length} className={styles.totalCell}>
               Showing {listItems.length} restaurants in Sydney
             </td>
           </tr>

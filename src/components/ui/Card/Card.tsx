@@ -9,6 +9,7 @@ import type { RestaurantType } from "../../../utils/types";
 import { modalId } from "../Modal/Modal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
+import { RestaurantContext } from "../../../context/RestaurantProvider";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -20,9 +21,13 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   const { name, imageUrl, cuisine, address, rating, price, visits, comments } = restaurant;
   const [isCommentVisible, setCommentVisible] = useState(false);
   const [isFavourited, setIsFavourited] = useState(false);
-  const [visitCount, setVisitCount] = useState(visits);
-  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
 
+  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+  const { dispatch } = useContext(RestaurantContext);
+
+  function handleRemoveRestaurant(id: string) {
+    dispatch(["REMOVE_RESTAURANT", id]);
+  }
   return (
     <div className={`${styles.container} ${className}`}>
       {imageUrl ? (
@@ -68,7 +73,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
         <div className={styles.actionsContainer}>
           <div className={styles.ratingVisitsContainer}>
             {rating !== undefined && <Rating ratingNum={rating} />}
-            <VisitsCounter count={visitCount} setCount={setVisitCount} />
+            <VisitsCounter visitId={restaurant.id} />
           </div>
           <div className={styles.buttonGroup}>
             <Button className={styles.actionButton}>
@@ -85,7 +90,12 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             >
               <Pencil />
             </Button>
-            <Button className={styles.actionButton}>
+            <Button
+              className={styles.actionButton}
+              onClick={() => {
+                handleRemoveRestaurant(restaurant.id);
+              }}
+            >
               <Trash />
             </Button>
           </div>
