@@ -53,7 +53,10 @@ export const Table = ({ className = "", listItems }: TableProps) => {
           {listItems.map((restaurant) => (
             <tr key={restaurant.id}>
               <td className={styles.nameCell}>
-                <div className={styles.name}>{restaurant.name}</div>
+                <div className={styles.name}>
+                  <img src={restaurant.imageUrl} alt={restaurant.name} />
+                  <span>{restaurant.name}</span>
+                </div>
               </td>
               <td className={styles.pillCell}>
                 <Pill variant="secondary">{restaurant.cuisine}</Pill>

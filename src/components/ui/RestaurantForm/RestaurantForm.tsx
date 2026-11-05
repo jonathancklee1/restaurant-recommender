@@ -106,7 +106,7 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
         />
       </div>
       <div>
-        <label>Rating</label>
+        <label>Your Rating</label>
         <RatingInput
           initialValue={restaurant.rating}
           changeRating={(rating) => updateField("rating", rating)}

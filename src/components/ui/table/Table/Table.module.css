@@ -98,11 +98,18 @@
 }
 
 .name {
-  display: -webkit-box;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+  img {
+    display: inline;
+    width: 3em;
+    aspect-ratio: square;
+    border-radius: 8px;
+    margin-right: 0.5em;
+  }
 }
 
 .comments {
