@@ -1,6 +1,6 @@
-import type { Price, Rating, RestaurantFilters, RestaurantType } from "./types";
+import type { PriceRangeType, Rating, RestaurantFilters, RestaurantType } from "./types";
 
-export const PRICE_OPTIONS: Price[] = [1, 2, 3, 4];
+export const PRICE_OPTIONS: PriceRangeType[] = ["$", "$$", "$$$", "$$$$"];
 
 export const RATING_OPTIONS: Rating[] = [1, 2, 3, 4, 5];
 

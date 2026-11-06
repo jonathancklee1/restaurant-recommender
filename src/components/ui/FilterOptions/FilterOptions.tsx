@@ -35,7 +35,7 @@ export const FilterOptions = ({
                 onChange({ ...filters, prices: toggleItem(filters.prices ?? [], price) })
               }
             >
-              {"$".repeat(price)}
+              {price}
             </FilterPill>
           ))}
         </div>
