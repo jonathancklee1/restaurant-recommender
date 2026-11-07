@@ -28,5 +28,6 @@ export interface RestaurantType {
   addedAt?: string; // YYYY-MM-DD
   lastVisitedAt?: string;
   isFavourited: boolean;
+  favouritedAt?: string; // ISO timestamp, set when favourited
 }
 export type PriceRangeType = "$" | "$$" | "$$$" | "$$$$";

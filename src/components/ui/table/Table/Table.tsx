@@ -7,6 +7,7 @@ import Pill from "../../Pill/Pill";
 import Rating from "../../Rating/Rating";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
 import Button from "../../Button/Button";
+import FavouriteButton from "../../FavouriteButton/FavouriteButton";
 import { modalId } from "../../Modal/Modal";
 import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
@@ -54,6 +55,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
             <tr key={restaurant.id}>
               <td className={styles.nameCell}>
                 <div className={styles.name}>
+                  <FavouriteButton restaurant={restaurant} />
                   <img src={restaurant.imageUrl} alt={restaurant.name} />
                   <span>{restaurant.name}</span>
                 </div>

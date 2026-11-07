@@ -3,8 +3,9 @@ import styles from "./Card.module.css";
 import Rating from "../Rating/Rating";
 import VisitsCounter from "../../VisitsCounter/VisitsCounter";
 import Pill from "../Pill/Pill";
-import { Bookmark, ChevronDown, MapPinned, Pencil, Trash } from "lucide-react";
+import { ChevronDown, MapPinned, Pencil, Trash } from "lucide-react";
 import Button from "../Button/Button";
+import FavouriteButton from "../FavouriteButton/FavouriteButton";
 import type { RestaurantType } from "../../../utils/types";
 import { modalId } from "../Modal/Modal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
@@ -27,16 +28,6 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   function handleRemoveRestaurant(id: string) {
     dispatch(["REMOVE_RESTAURANT", id]);
   }
-  function handleToggleFavourite(id: string) {
-    dispatch([
-      "UPDATE_RESTAURANT",
-      id,
-      {
-        ...restaurant,
-        isFavourited: !restaurant.isFavourited,
-      },
-    ]);
-  }
   return (
     <div className={`${styles.container} ${className}`}>
       {imageUrl ? (
@@ -53,12 +44,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
               {cuisine} • {getSuburb(address)} • {price}
             </span>
           </div>
-          <Bookmark
-            fill={restaurant.isFavourited ? "var(--primary)" : "var(--text-secondary)"}
-            onClick={() => {
-              handleToggleFavourite(restaurant.id);
-            }}
-          />
+          <FavouriteButton restaurant={restaurant} />
         </div>
 
         <div className={styles.pillContainer}>
