@@ -15,7 +15,7 @@ export interface RestaurantFilters {
 /** A restaurant row in the table. */
 export interface RestaurantType {
   id: string;
-  name?: string;
+  name: string;
   imageUrl?: string;
   cuisine?: string;
   rating?: Rating; // 1-5
