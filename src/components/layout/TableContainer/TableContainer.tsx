@@ -9,6 +9,7 @@ import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantPr
 import type { RestaurantFilters } from "../../../utils/types";
 import { EMPTY_FILTERS } from "../../../utils/constants";
 import { filterRestaurants } from "../../../utils/helpers/filterRestaurants";
+import { sortFavouriteRestaurants } from "../../../utils/helpers/sortFavouriteRestaurants";
 
 export interface TableContainerProps {
   children?: React.ReactNode;
@@ -20,7 +21,7 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
   const { selectedRestaurant } = useContext(SelectedRestaurantContext);
 
   const [filters, setFilters] = useState<RestaurantFilters>(EMPTY_FILTERS);
-  const filteredRestaurants = filterRestaurants(state, filters);
+  const filteredRestaurants = sortFavouriteRestaurants(filterRestaurants(state, filters));
 
   return (
     <div className={`container ${styles.container} ${className}`}>

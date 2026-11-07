@@ -20,13 +20,22 @@ export interface CardProps {
 export const Card = ({ className = "", restaurant }: CardProps) => {
   const { name, imageUrl, cuisine, address, rating, price, visits, comments } = restaurant;
   const [isCommentVisible, setCommentVisible] = useState(false);
-  const [isFavourited, setIsFavourited] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   const { dispatch } = useContext(RestaurantContext);
 
   function handleRemoveRestaurant(id: string) {
     dispatch(["REMOVE_RESTAURANT", id]);
+  }
+  function handleToggleFavourite(id: string) {
+    dispatch([
+      "UPDATE_RESTAURANT",
+      id,
+      {
+        ...restaurant,
+        isFavourited: !restaurant.isFavourited,
+      },
+    ]);
   }
   return (
     <div className={`${styles.container} ${className}`}>
@@ -45,9 +54,9 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             </span>
           </div>
           <Bookmark
-            fill={isFavourited ? "var(--primary)" : "var(--text-secondary)"}
+            fill={restaurant.isFavourited ? "var(--primary)" : "var(--text-secondary)"}
             onClick={() => {
-              setIsFavourited((prev) => !prev);
+              handleToggleFavourite(restaurant.id);
             }}
           />
         </div>

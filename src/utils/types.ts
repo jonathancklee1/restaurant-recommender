@@ -27,5 +27,6 @@ export interface RestaurantType {
   lng?: number;
   addedAt?: string; // YYYY-MM-DD
   lastVisitedAt?: string;
+  isFavourited: boolean;
 }
 export type PriceRangeType = "$" | "$$" | "$$$" | "$$$$";
