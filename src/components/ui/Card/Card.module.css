@@ -58,7 +58,8 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.restaurantImage {
+.restaurantImage,
+.emptyImage {
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 8px;
@@ -88,7 +89,7 @@
 }
 .commentsButton {
   display: flex;
-
+  padding-inline: 0px;
   background: var(--background-primary);
   color: var(--text-primary);
   &:hover {

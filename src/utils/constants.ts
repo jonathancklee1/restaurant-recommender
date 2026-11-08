@@ -26,6 +26,7 @@ export const COLUMN_HEADERS: string[] = [
   "Actions",
 ];
 
+export const LS_KEY = "saved-restaurants";
 export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "1",

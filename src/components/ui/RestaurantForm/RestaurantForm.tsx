@@ -18,7 +18,7 @@ const createEmptyRestaurant = (): RestaurantType => ({
   name: "",
   imageUrl: "",
   cuisine: "",
-  rating: 0,
+  rating: undefined,
   price: "$",
   visits: 0,
   comments: "",
@@ -27,6 +27,7 @@ const createEmptyRestaurant = (): RestaurantType => ({
   lng: undefined,
   addedAt: new Date().toISOString().slice(0, 10),
   lastVisitedAt: "",
+  isFavourited: false,
 });
 
 /**

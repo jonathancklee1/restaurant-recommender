@@ -1,5 +1,5 @@
-import { createContext, useReducer, type Dispatch, type ReactNode } from "react";
-import { INITIAL_RESTAURANTS } from "../utils/constants";
+import { createContext, useEffect, useReducer, type Dispatch, type ReactNode } from "react";
+import { INITIAL_RESTAURANTS, LS_KEY } from "../utils/constants";
 import { restaurantReducer, type RestaurantActions } from "../store/RestaurantStore";
 import type { RestaurantType } from "../utils/types";
 
@@ -15,7 +15,12 @@ export const RestaurantContext = createContext<RestaurantContextValue>({
 });
 
 export function RestaurantProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(restaurantReducer, INITIAL_RESTAURANTS);
-
+  const [state, dispatch] = useReducer(restaurantReducer, INITIAL_RESTAURANTS, (initial) => {
+    const saved = localStorage.getItem(LS_KEY);
+    return saved ? JSON.parse(saved) : initial;
+  });
+  useEffect(() => {
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }, [state]);
   return <RestaurantContext value={{ state, dispatch }}>{children}</RestaurantContext>;
 }

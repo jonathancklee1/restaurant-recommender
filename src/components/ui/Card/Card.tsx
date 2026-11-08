@@ -33,7 +33,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
       {imageUrl ? (
         <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
       ) : (
-        <div>No image</div>
+        <div className={styles.emptyImage}></div>
       )}
 
       <div className={styles.content}>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { MapPin, Pencil, Trash, Utensils } from "lucide-react";
 import styles from "./Table.module.css";
 import { COLUMN_HEADERS } from "../../../../utils/constants";
-import type { RestaurantType } from "../../../../utils/types";
+import type { RestaurantFilters, RestaurantType } from "../../../../utils/types";
 import Pill from "../../Pill/Pill";
 import Rating from "../../Rating/Rating";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
@@ -12,14 +12,23 @@ import { modalId } from "../../Modal/Modal";
 import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 import { RestaurantContext } from "../../../../context/RestaurantProvider";
+import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
+import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
 
 export interface TableProps {
   children?: React.ReactNode;
   className?: string;
-  listItems: RestaurantType[];
+  restaurants: RestaurantType[];
+  deferredFilters: RestaurantFilters;
 }
 
-export const Table = ({ className = "", listItems }: TableProps) => {
+/** Desktop table. Memoised so it only re-renders when the deferred filters catch up. */
+export const Table = memo(function Table({
+  className = "",
+  restaurants,
+  deferredFilters,
+}: TableProps) {
+  const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   const { dispatch } = useContext(RestaurantContext);
 
@@ -56,16 +65,17 @@ export const Table = ({ className = "", listItems }: TableProps) => {
               <td className={styles.nameCell}>
                 <div className={styles.name}>
                   <FavouriteButton restaurant={restaurant} />
-                  <img src={restaurant.imageUrl} alt={restaurant.name} />
+                  {restaurant.imageUrl && <img src={restaurant.imageUrl} alt={restaurant.name} />}
+
                   <span>{restaurant.name}</span>
                 </div>
               </td>
               <td className={styles.pillCell}>
-                <Pill variant="secondary">{restaurant.cuisine}</Pill>
+                <Pill variant="secondary">{restaurant.cuisine ?? "-"}</Pill>
               </td>
-              <td className={styles.suburbCell}>{getSuburb(restaurant.address)}</td>
+              <td className={styles.suburbCell}>{getSuburb(restaurant.address ?? "-")}</td>
 
-              <td className={styles.priceCell}>{restaurant.price}</td>
+              <td className={styles.priceCell}>{restaurant.price ?? "-"}</td>
               <td className={styles.visitsCell}>
                 <VisitsCounter count={restaurant.visits} visitId={restaurant.id} />
               </td>
@@ -110,6 +120,6 @@ export const Table = ({ className = "", listItems }: TableProps) => {
       </table>
     </div>
   );
-};
+});
 
 export default Table;

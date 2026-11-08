@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useDeferredValue, useState } from "react";
 import styles from "./TableContainer.module.css";
 import Table from "../../ui/table/Table/Table";
 import MobileList from "../../ui/table/MobileList/MobileList";
@@ -8,8 +8,6 @@ import Modal from "../../ui/Modal/Modal";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 import type { RestaurantFilters } from "../../../utils/types";
 import { EMPTY_FILTERS } from "../../../utils/constants";
-import { filterRestaurants } from "../../../utils/helpers/filterRestaurants";
-import { sortFavouriteRestaurants } from "../../../utils/helpers/sortFavouriteRestaurants";
 
 export interface TableContainerProps {
   children?: React.ReactNode;
@@ -21,7 +19,9 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
   const { selectedRestaurant } = useContext(SelectedRestaurantContext);
 
   const [filters, setFilters] = useState<RestaurantFilters>(EMPTY_FILTERS);
-  const filteredRestaurants = sortFavouriteRestaurants(filterRestaurants(state, filters));
+
+  const deferredFilters = useDeferredValue(filters);
+  const isStale = filters !== deferredFilters;
 
   return (
     <div className={`container ${styles.container} ${className}`}>
@@ -32,11 +32,11 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
           setFilters={setFilters}
         />
       </div>
-      <div className={styles.table}>
-        <Table listItems={filteredRestaurants} />
+      <div className={`${styles.table} ${isStale ? styles.stale : ""}`}>
+        <Table restaurants={state} deferredFilters={deferredFilters} />
       </div>
-      <div className={styles.mobileList}>
-        <MobileList listItems={filteredRestaurants} />
+      <div className={`${styles.mobileList} ${isStale ? styles.stale : ""}`}>
+        <MobileList restaurants={state} deferredFilters={deferredFilters} />
       </div>
       <Modal initialPlace={selectedRestaurant} />
     </div>

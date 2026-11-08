@@ -3,6 +3,7 @@ import type { RestaurantType } from "./types";
 /** Placeholder restaurants until real data is stored. Visits of 0 means "want to eat". */
 export const DUMMY_RESTAURANTS: RestaurantType[] = [
   {
+    isFavourited: false,
     id: "1",
     name: "Kopi Lane",
     imageUrl: "https://picsum.photos/seed/kopi-lane/400/400",
@@ -14,6 +15,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     comments: "Char kway teow has proper wok hei. Go early, the queue builds after 12.",
   },
   {
+    isFavourited: false,
     id: "2",
     name: "Nonna Rosa",
     imageUrl: "https://picsum.photos/seed/nonna-rosa/400/400",
@@ -25,6 +27,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     comments: "Cacio e pepe is the order. Tiramisu was a bit too sweet.",
   },
   {
+    isFavourited: false,
     id: "3",
     name: "Saigon Corner",
     imageUrl: "https://picsum.photos/seed/saigon-corner/400/400",
@@ -36,6 +39,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     comments: "Best pho broth around. Cash only.",
   },
   {
+    isFavourited: false,
     id: "4",
     name: "Hanami Izakaya",
     imageUrl: "https://picsum.photos/seed/hanami-izakaya/400/400",
@@ -46,6 +50,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     comments: "Friend recommended the karaage and the highball list.",
   },
   {
+    isFavourited: false,
     id: "5",
     name: "Ember & Salt",
     imageUrl: "https://picsum.photos/seed/ember-salt/400/400",
@@ -55,6 +60,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     visits: 0,
   },
   {
+    isFavourited: false,
     id: "6",
     name: "Little Seoul BBQ",
     imageUrl: "https://picsum.photos/seed/little-seoul/400/400",
@@ -66,6 +72,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     comments: "Meat was good but service was slow on a Friday night.",
   },
   {
+    isFavourited: false,
     id: "7",
     name: "Taqueria Sol",
     imageUrl: "https://picsum.photos/seed/taqueria-sol/400/400",
@@ -75,6 +82,7 @@ export const DUMMY_RESTAURANTS: RestaurantType[] = [
     visits: 0,
   },
   {
+    isFavourited: false,
     id: "8",
     name: "Spice Route",
     imageUrl: "https://picsum.photos/seed/spice-route/400/400",
