@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression } from "leaflet";
 import { SYDNEY_CBD } from "../../utils/constants";
+import { TriangleAlert } from "lucide-react";
 interface MapProps {
   address: string | null;
   className?: string;
@@ -64,7 +65,12 @@ export const Map = ({ address, className = "" }: MapProps) => {
   return (
     <div className={`${styles.container} ${className}`}>
       {loading && <div className={styles.loadingContainer}>Locating...</div>}
-      {error && <div className={styles.error}>{error}</div>}
+      {error && (
+        <div className={styles.error}>
+          <TriangleAlert />
+          {error}
+        </div>
+      )}
 
       <MapContainer center={position} zoom={13} className={styles.map}>
         <TileLayer

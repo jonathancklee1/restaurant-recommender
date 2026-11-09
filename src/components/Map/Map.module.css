@@ -22,7 +22,17 @@
 .error {
   position: absolute;
   z-index: 1000;
-  color: red;
+  right: 1em;
+  top: 1em;
+  color: var(--text-secondary);
+  background: red;
+  padding: 1em;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
 }
 
 .map {
