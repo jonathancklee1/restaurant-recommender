@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./FilterOptions.module.css";
 import FilterPill from "../FilterPill/FilterPill";
 import CuisineFilter from "../CuisineFilter/CuisineFilter";
-import { MIN_RATING_OPTIONS, PRICE_OPTIONS } from "../../../utils/constants";
+import { PRICE_OPTIONS, RATING_OPTIONS } from "../../../utils/constants";
 import { toggleItem } from "../../../utils/helpers/toggleItem";
 import type { RestaurantFilters } from "../../../utils/types";
 
@@ -30,10 +30,12 @@ export const FilterOptions = ({
           {PRICE_OPTIONS.map((price) => (
             <FilterPill
               key={price}
-              selected={filters.prices.includes(price)}
-              onClick={() => onChange({ ...filters, prices: toggleItem(filters.prices, price) })}
+              selected={filters.prices && filters.prices.includes(price)}
+              onClick={() =>
+                onChange({ ...filters, prices: toggleItem(filters.prices ?? [], price) })
+              }
             >
-              {"$".repeat(price)}
+              {price}
             </FilterPill>
           ))}
         </div>
@@ -41,19 +43,13 @@ export const FilterOptions = ({
 
       <FilterGroup title="Rating">
         <div className={styles.pills}>
-          <FilterPill
-            selected={filters.minRating === null}
-            onClick={() => onChange({ ...filters, minRating: null })}
-          >
-            Any
-          </FilterPill>
-          {MIN_RATING_OPTIONS.map((rating) => (
+          {RATING_OPTIONS.map((rating) => (
             <FilterPill
               key={rating}
-              selected={filters.minRating === rating}
-              onClick={() => onChange({ ...filters, minRating: rating })}
+              selected={filters.ratings.includes(rating)}
+              onClick={() => onChange({ ...filters, ratings: toggleItem(filters.ratings, rating) })}
             >
-              {rating === 5 ? "5" : `${rating}+`} ★
+              {rating} ★
             </FilterPill>
           ))}
         </div>
@@ -62,7 +58,7 @@ export const FilterOptions = ({
       <FilterGroup title="Cuisine">
         <CuisineFilter
           cuisines={cuisines}
-          selected={filters.cuisines}
+          selected={filters.cuisines ?? []}
           onChange={(selected) => onChange({ ...filters, cuisines: selected })}
         />
       </FilterGroup>

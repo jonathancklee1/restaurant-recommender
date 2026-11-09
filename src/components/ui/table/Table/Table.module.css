@@ -20,9 +20,11 @@
     white-space: nowrap;
   }
   .nameCell {
-    min-width: 10em;
+    min-width: 13em;
     width: 100%;
     white-space: normal;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
   .commentsCell {
     min-width: 15em;
@@ -55,11 +57,18 @@
     background-color: var(--background-secondary);
   }
 
+  tbody .emptyRow td {
+    position: static;
+    text-align: center;
+    padding: 1em;
+  }
+
   tbody tr:hover {
     background-color: var(--background-secondary);
     .nameCell {
       color: var(--primary);
-      border-left: 2px solid var(--primary);
+      /* Inset shadow draws the accent without changing the cell's size. */
+      box-shadow: inset 2px 0 0 var(--primary);
     }
     th:last-child,
     td:last-child {
@@ -92,11 +101,23 @@
 }
 
 .name {
-  display: -webkit-box;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+  gap: 0.5em;
+  img {
+    display: inline;
+    width: 3em;
+    height: 3em;
+    aspect-ratio: square;
+    border-radius: 8px;
+    margin-right: 0.5em;
+  }
+  button {
+    flex-shrink: 0;
+  }
 }
 
 .comments {
@@ -105,6 +126,24 @@
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: 2.5rem 1rem;
+  border: 2px dashed var(--border-primary);
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  font-weight: 600;
+}
+
+.emptyIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary);
 }
 
 .totalCell {

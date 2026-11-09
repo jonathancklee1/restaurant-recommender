@@ -1,17 +1,34 @@
-import React from "react";
+import React, { memo } from "react";
+import { Utensils } from "lucide-react";
 import styles from "./MobileList.module.css";
 import Card from "../../Card/Card";
-import type { RestaurantType } from "../../../../utils/types";
+import type { RestaurantFilters, RestaurantType } from "../../../../utils/types";
+import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
+import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
 
 export interface MobileListProps {
   children?: React.ReactNode;
   className?: string;
-  listItems: RestaurantType[];
+  restaurants: RestaurantType[];
+  deferredFilters: RestaurantFilters;
 }
 
-export const MobileList = ({ className = "", listItems }: MobileListProps) => {
+/** Mobile card list. Memoised so it only re-renders when the deferred filters catch up. */
+export const MobileList = memo(function MobileList({
+  className = "",
+  restaurants,
+  deferredFilters,
+}: MobileListProps) {
+  const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
+
   return (
     <ul className={`${styles.container} ${className}`}>
+      {listItems.length === 0 && (
+        <li className={styles.empty}>
+          <Utensils className={styles.emptyIcon} />
+          <span>No Restaurants</span>
+        </li>
+      )}
       {listItems.map((restaurant) => (
         <li key={restaurant.id}>
           <Card restaurant={restaurant} />
@@ -19,6 +36,6 @@ export const MobileList = ({ className = "", listItems }: MobileListProps) => {
       ))}
     </ul>
   );
-};
+});
 
 export default MobileList;

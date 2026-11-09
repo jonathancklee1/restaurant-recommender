@@ -23,7 +23,7 @@ export const CuisineFilter = ({
   const search = query.trim().toLowerCase();
 
   const visible =
-    search || expanded || !isLong
+    cuisines.length > 0 && (search || expanded || !isLong)
       ? cuisines.filter((c) => c.toLowerCase().includes(search))
       : cuisines.filter((c, i) => i < CUISINE_PREVIEW_COUNT || selected.includes(c));
 

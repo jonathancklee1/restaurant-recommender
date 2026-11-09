@@ -1,10 +1,14 @@
-/** Price level from $ to $$$$. */
-export type Price = 1 | 2 | 3 | 4;
+/** Star rating from 1 to 5. */
+export type Rating = 1 | 2 | 3 | 4 | 5;
 
 /** Filters chosen in the filter sheet. Empty means no filter. */
+
+export type VisitStatusType = "Visited" | "Want to Eat" | null;
 export interface RestaurantFilters {
-  prices: Price[];
-  minRating: number | null;
+  searchTerm: string;
+  visitStatus: VisitStatusType;
+  prices: PriceRangeType[];
+  ratings: Rating[];
   cuisines: string[];
 }
 
@@ -12,16 +16,18 @@ export interface RestaurantFilters {
 export interface RestaurantType {
   id: string;
   name: string;
-  imageUrl: string;
-  cuisine: string;
-  suburb: string;
-  rating?: number; // 1-5
-  price: PriceRangeType;
-  visits: number;
+  imageUrl?: string;
+  cuisine?: string;
+  rating?: Rating; // 1-5
+  price?: PriceRangeType;
+  visits?: number;
   comments?: string;
+  address?: string;
   lat?: number;
   lng?: number;
   addedAt?: string; // YYYY-MM-DD
   lastVisitedAt?: string;
+  isFavourited: boolean;
+  favouritedAt?: string; // ISO timestamp, set when favourited
 }
 export type PriceRangeType = "$" | "$$" | "$$$" | "$$$$";

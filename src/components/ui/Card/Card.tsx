@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Card.module.css";
 import Rating from "../Rating/Rating";
 import VisitsCounter from "../../VisitsCounter/VisitsCounter";
 import Pill from "../Pill/Pill";
-import { Bookmark, ChevronDown, MapPinned, Pencil, Trash } from "lucide-react";
+import { ChevronDown, MapPinned, Pencil } from "lucide-react";
 import Button from "../Button/Button";
+import FavouriteButton from "../FavouriteButton/FavouriteButton";
+import DeleteButton from "../DeleteButton/DeleteButton";
 import type { RestaurantType } from "../../../utils/types";
 import { modalId } from "../Modal/Modal";
+import { getSuburb } from "../../../utils/helpers/getSuburb";
+import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -15,31 +19,33 @@ export interface CardProps {
 }
 
 export const Card = ({ className = "", restaurant }: CardProps) => {
-  const { name, imageUrl, cuisine, suburb, rating, price, visits, comments } = restaurant;
+  const { name, imageUrl, cuisine, address, rating, price, visits, comments } = restaurant;
   const [isCommentVisible, setCommentVisible] = useState(false);
-  const [isFavourited, setIsFavourited] = useState(false);
-  const [visitCount, setVisitCount] = useState(visits);
+
+  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+
   return (
     <div className={`${styles.container} ${className}`}>
-      <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
+      {imageUrl ? (
+        <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
+      ) : (
+        <div className={styles.emptyImage}></div>
+      )}
+
       <div className={styles.content}>
         <div className={styles.detailsContainer}>
           <div>
             <p className={styles.name}>{name}</p>
             <span className={styles.details}>
-              {cuisine} • {suburb} • {price}
+              {cuisine} • {getSuburb(address)} • {price}{" "}
             </span>
           </div>
-          <Bookmark
-            fill={isFavourited ? "var(--primary)" : "var(--text-secondary)"}
-            onClick={() => {
-              setIsFavourited((prev) => !prev);
-            }}
-          />
+          <FavouriteButton restaurant={restaurant} />
         </div>
 
         <div className={styles.pillContainer}>
           <Pill variant="secondary">{visits === 0 ? "Want to eat" : "Visited"}</Pill>
+          {rating !== undefined && <Rating ratingNum={rating} />}
         </div>
 
         {comments && (
@@ -58,8 +64,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
 
         <div className={styles.actionsContainer}>
           <div className={styles.ratingVisitsContainer}>
-            {rating !== undefined && <Rating ratingNum={rating} />}
-            <VisitsCounter count={visitCount} setCount={setVisitCount} />
+            <VisitsCounter visitId={restaurant.id} />
           </div>
           <div className={styles.buttonGroup}>
             <Button className={styles.actionButton}>
@@ -70,12 +75,13 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
               type="button"
               command="show-modal"
               commandfor={modalId}
+              onClick={() => {
+                setSelectedRestaurant(restaurant);
+              }}
             >
               <Pencil />
             </Button>
-            <Button className={styles.actionButton}>
-              <Trash />
-            </Button>
+            <DeleteButton className={styles.actionButton} restaurant={restaurant} />
           </div>
         </div>
       </div>

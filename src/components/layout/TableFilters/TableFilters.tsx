@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import styles from "./TableFilters.module.css";
 import Button from "../../ui/Button/Button";
 import { ChevronDown, ChevronUp, Filter, Search } from "lucide-react";
@@ -11,34 +11,90 @@ import type { RestaurantFilters } from "../../../utils/types";
 export interface TableFiltersProps {
   className?: string;
   cuisines: string[];
+  filters: RestaurantFilters;
+  setFilters: Dispatch<SetStateAction<RestaurantFilters>>;
 }
 
-export const TableFilters = ({ className = "", cuisines }: TableFiltersProps) => {
+export const TableFilters = ({
+  className = "",
+  cuisines,
+  filters,
+  setFilters,
+}: TableFiltersProps) => {
   const sheetRef = useRef<HTMLDialogElement>(null);
-  const [filters, setFilters] = useState<RestaurantFilters>(EMPTY_FILTERS);
+
   const [isFiltersExpanded, setIsFiltersExpanded] = useState(true);
 
-  const activeCount = filters.prices.length + filters.cuisines.length + (filters.minRating ? 1 : 0);
+  const activeCount =
+    filters.prices &&
+    filters.cuisines &&
+    filters.prices.length + filters.cuisines.length + filters.ratings.length;
 
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={`${styles.searchContainer} ${className}`}>
         <search>
           <form>
-            <input type="search" id="restaurant-search" placeholder="Search restaurants" />
+            <input
+              type="search"
+              id="restaurant-search"
+              placeholder="Search restaurants"
+              value={filters.searchTerm}
+              onChange={(e) =>
+                setFilters((prev) => {
+                  return { ...prev, searchTerm: e.target.value };
+                })
+              }
+            />
           </form>
           <Search className={styles.searchIcon} />
         </search>
       </div>
       <div className={`${styles.additionalContainer} `}>
         <div className={`${styles.pillsContainer} `}>
-          <FilterPill selected>All</FilterPill>
-          <FilterPill>Want to Eat</FilterPill>
-          <FilterPill>Visited</FilterPill>
+          <FilterPill
+            selected={!filters.visitStatus}
+            onClick={() => {
+              setFilters((prev) => {
+                return {
+                  ...prev,
+                  visitStatus: null,
+                };
+              });
+            }}
+          >
+            All
+          </FilterPill>
+          <FilterPill
+            selected={filters.visitStatus === "Want to Eat"}
+            onClick={() => {
+              setFilters((prev) => {
+                return {
+                  ...prev,
+                  visitStatus: "Want to Eat",
+                };
+              });
+            }}
+          >
+            Want to Eat
+          </FilterPill>
+          <FilterPill
+            selected={filters.visitStatus === "Visited"}
+            onClick={() => {
+              setFilters((prev) => {
+                return {
+                  ...prev,
+                  visitStatus: "Visited",
+                };
+              });
+            }}
+          >
+            Visited
+          </FilterPill>
         </div>
         <Button onClick={() => sheetRef.current?.showModal()}>
           <Filter />
-          {activeCount > 0 && <span className={styles.badge}>{activeCount}</span>}
+          {activeCount! > 0 && <span className={styles.badge}>{activeCount}</span>}
         </Button>
       </div>
       <FilterSheet ref={sheetRef} filters={filters} onChange={setFilters} cuisines={cuisines} />
@@ -55,7 +111,7 @@ export const TableFilters = ({ className = "", cuisines }: TableFiltersProps) =>
               {isFiltersExpanded ? <ChevronUp /> : <ChevronDown />}
             </button>
           </h2>
-          {activeCount > 0 && (
+          {activeCount! > 0 && (
             <button
               type="button"
               className={styles.clearButton}

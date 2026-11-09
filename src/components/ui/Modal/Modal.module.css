@@ -2,10 +2,12 @@
   margin: auto;
   border: none;
   border-radius: var(--border-radius);
+  width: 80%;
   &[open] {
     display: flex;
   }
   form {
+    width: 100%;
     padding: 20px;
     border-radius: var(--border-radius);
     display: flex;
@@ -30,4 +32,10 @@
   right: 0;
   padding: 10px;
   cursor: pointer;
+}
+
+@media (min-width: 765px) {
+  .container {
+    max-width: 600px;
+  }
 }

@@ -1,21 +1,36 @@
-import React from "react";
-import { MapPin, Pencil, Trash } from "lucide-react";
+import React, { memo, useContext } from "react";
+import { MapPin, Pencil, Utensils } from "lucide-react";
 import styles from "./Table.module.css";
 import { COLUMN_HEADERS } from "../../../../utils/constants";
-import type { RestaurantType } from "../../../../utils/types";
+import type { RestaurantFilters, RestaurantType } from "../../../../utils/types";
 import Pill from "../../Pill/Pill";
 import Rating from "../../Rating/Rating";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
 import Button from "../../Button/Button";
+import FavouriteButton from "../../FavouriteButton/FavouriteButton";
+import DeleteButton from "../../DeleteButton/DeleteButton";
 import { modalId } from "../../Modal/Modal";
+import { getSuburb } from "../../../../utils/helpers/getSuburb";
+import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
+import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
+import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
 
 export interface TableProps {
   children?: React.ReactNode;
   className?: string;
-  listItems: RestaurantType[];
+  restaurants: RestaurantType[];
+  deferredFilters: RestaurantFilters;
 }
 
-export const Table = ({ className = "", listItems }: TableProps) => {
+/** Desktop table. Memoised so it only re-renders when the deferred filters catch up. */
+export const Table = memo(function Table({
+  className = "",
+  restaurants,
+  deferredFilters,
+}: TableProps) {
+  const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
+  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+
   return (
     <div className={`${styles.container} ${className}`}>
       <table className={styles.table}>
@@ -31,19 +46,34 @@ export const Table = ({ className = "", listItems }: TableProps) => {
           </tr>
         </thead>
         <tbody>
+          {listItems.length === 0 && (
+            <tr className={styles.emptyRow}>
+              <td colSpan={COLUMN_HEADERS.length}>
+                <div className={styles.empty}>
+                  <Utensils className={styles.emptyIcon} />
+                  <span>No Restaurants</span>
+                </div>
+              </td>
+            </tr>
+          )}
           {listItems.map((restaurant) => (
             <tr key={restaurant.id}>
               <td className={styles.nameCell}>
-                <div className={styles.name}>{restaurant.name}</div>
+                <div className={styles.name}>
+                  <FavouriteButton restaurant={restaurant} />
+                  {restaurant.imageUrl && <img src={restaurant.imageUrl} alt={restaurant.name} />}
+
+                  <span>{restaurant.name}</span>
+                </div>
               </td>
               <td className={styles.pillCell}>
-                <Pill variant="secondary">{restaurant.cuisine}</Pill>
+                <Pill variant="secondary">{restaurant.cuisine ?? "-"}</Pill>
               </td>
-              <td className={styles.suburbCell}>{restaurant.suburb}</td>
+              <td className={styles.suburbCell}>{getSuburb(restaurant.address ?? "-")}</td>
 
-              <td className={styles.priceCell}>{restaurant.price}</td>
+              <td className={styles.priceCell}>{restaurant.price ?? "-"}</td>
               <td className={styles.visitsCell}>
-                <VisitsCounter count={restaurant.visits} />
+                <VisitsCounter count={restaurant.visits} visitId={restaurant.id} />
               </td>
               <td className={styles.ratingCell}>
                 <Rating ratingNum={restaurant.rating} />
@@ -56,12 +86,15 @@ export const Table = ({ className = "", listItems }: TableProps) => {
                   <Button>
                     <MapPin />
                   </Button>
-                  <Button type="button" command="show-modal" commandfor={modalId}>
+                  <Button
+                    type="button"
+                    command="show-modal"
+                    commandfor={modalId}
+                    onClick={() => setSelectedRestaurant(restaurant)}
+                  >
                     <Pencil />
                   </Button>
-                  <Button>
-                    <Trash />
-                  </Button>
+                  <DeleteButton restaurant={restaurant} />
                 </div>
               </td>
             </tr>
@@ -69,7 +102,7 @@ export const Table = ({ className = "", listItems }: TableProps) => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={10} className={styles.totalCell}>
+            <td colSpan={COLUMN_HEADERS.length} className={styles.totalCell}>
               Showing {listItems.length} restaurants in Sydney
             </td>
           </tr>
@@ -77,6 +110,6 @@ export const Table = ({ className = "", listItems }: TableProps) => {
       </table>
     </div>
   );
-};
+});
 
 export default Table;
