@@ -9,7 +9,7 @@ export const Rating = ({ className = "", ratingNum }: RatingProps) => {
   return (
     <div className={`${styles.container} ${className}`}>
       <span className={styles.star}>★</span>
-      <span className={styles.star}>{ratingNum ? ratingNum : "-"}</span>
+      <span>{ratingNum ? ratingNum : "-"}</span>
     </div>
   );
 };

@@ -1,0 +1,23 @@
+.dialog {
+  margin: auto;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  width: min(90%, 360px);
+  color: var(--text-primary);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel {
+  background-color: var(--background-muted);
+  color: var(--text-primary);
+  &:hover {
+    background-color: var(--background-accent);
+  }
+}

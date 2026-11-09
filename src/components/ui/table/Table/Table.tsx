@@ -1,5 +1,5 @@
 import React, { memo, useContext } from "react";
-import { MapPin, Pencil, Trash, Utensils } from "lucide-react";
+import { MapPin, Pencil, Utensils } from "lucide-react";
 import styles from "./Table.module.css";
 import { COLUMN_HEADERS } from "../../../../utils/constants";
 import type { RestaurantFilters, RestaurantType } from "../../../../utils/types";
@@ -8,10 +8,10 @@ import Rating from "../../Rating/Rating";
 import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
 import Button from "../../Button/Button";
 import FavouriteButton from "../../FavouriteButton/FavouriteButton";
+import DeleteButton from "../../DeleteButton/DeleteButton";
 import { modalId } from "../../Modal/Modal";
 import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
-import { RestaurantContext } from "../../../../context/RestaurantProvider";
 import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
 import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
 
@@ -30,11 +30,7 @@ export const Table = memo(function Table({
 }: TableProps) {
   const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { dispatch } = useContext(RestaurantContext);
 
-  function handleRemoveRestaurant(id: string) {
-    dispatch(["REMOVE_RESTAURANT", id]);
-  }
   return (
     <div className={`${styles.container} ${className}`}>
       <table className={styles.table}>
@@ -98,13 +94,7 @@ export const Table = memo(function Table({
                   >
                     <Pencil />
                   </Button>
-                  <Button
-                    onClick={() => {
-                      handleRemoveRestaurant(restaurant.id);
-                    }}
-                  >
-                    <Trash />
-                  </Button>
+                  <DeleteButton restaurant={restaurant} />
                 </div>
               </td>
             </tr>

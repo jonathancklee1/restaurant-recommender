@@ -3,14 +3,14 @@ import styles from "./Card.module.css";
 import Rating from "../Rating/Rating";
 import VisitsCounter from "../../VisitsCounter/VisitsCounter";
 import Pill from "../Pill/Pill";
-import { ChevronDown, MapPinned, Pencil, Trash } from "lucide-react";
+import { ChevronDown, MapPinned, Pencil } from "lucide-react";
 import Button from "../Button/Button";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
+import DeleteButton from "../DeleteButton/DeleteButton";
 import type { RestaurantType } from "../../../utils/types";
 import { modalId } from "../Modal/Modal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
-import { RestaurantContext } from "../../../context/RestaurantProvider";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -23,11 +23,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   const [isCommentVisible, setCommentVisible] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { dispatch } = useContext(RestaurantContext);
 
-  function handleRemoveRestaurant(id: string) {
-    dispatch(["REMOVE_RESTAURANT", id]);
-  }
   return (
     <div className={`${styles.container} ${className}`}>
       {imageUrl ? (
@@ -41,7 +37,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
           <div>
             <p className={styles.name}>{name}</p>
             <span className={styles.details}>
-              {cuisine} • {getSuburb(address)} • {price}
+              {cuisine} • {getSuburb(address)} • {price}{" "}
             </span>
           </div>
           <FavouriteButton restaurant={restaurant} />
@@ -49,6 +45,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
 
         <div className={styles.pillContainer}>
           <Pill variant="secondary">{visits === 0 ? "Want to eat" : "Visited"}</Pill>
+          {rating !== undefined && <Rating ratingNum={rating} />}
         </div>
 
         {comments && (
@@ -67,7 +64,6 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
 
         <div className={styles.actionsContainer}>
           <div className={styles.ratingVisitsContainer}>
-            {rating !== undefined && <Rating ratingNum={rating} />}
             <VisitsCounter visitId={restaurant.id} />
           </div>
           <div className={styles.buttonGroup}>
@@ -85,14 +81,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             >
               <Pencil />
             </Button>
-            <Button
-              className={styles.actionButton}
-              onClick={() => {
-                handleRemoveRestaurant(restaurant.id);
-              }}
-            >
-              <Trash />
-            </Button>
+            <DeleteButton className={styles.actionButton} restaurant={restaurant} />
           </div>
         </div>
       </div>
