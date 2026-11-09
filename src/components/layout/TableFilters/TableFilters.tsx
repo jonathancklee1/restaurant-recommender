@@ -125,15 +125,13 @@ export const TableFilters = ({
           className={`${styles.filtersContainer} ${isFiltersExpanded ? "" : styles.collapsed}`}
           inert={!isFiltersExpanded}
         >
-          <div>
-            <FilterOptions
-              className={styles.filterOptions}
-              layout="row"
-              filters={filters}
-              onChange={setFilters}
-              cuisines={cuisines}
-            />
-          </div>
+          <FilterOptions
+            className={styles.filterOptions}
+            layout="row"
+            filters={filters}
+            onChange={setFilters}
+            cuisines={cuisines}
+          />
         </div>
       </section>
     </div>

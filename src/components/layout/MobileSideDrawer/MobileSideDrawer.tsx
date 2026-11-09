@@ -1,7 +1,7 @@
 import styles from "./MobileSideDrawer.module.css";
-import Map from "../../components/Map/Map";
+import Map from "../../Map/Map";
 import { useContext } from "react";
-import { RestaurantMapContext } from "../../context/RestaurantMapProvider";
+import { RestaurantMapContext } from "../../../context/RestaurantMapProvider";
 import { X } from "lucide-react";
 export interface MobileSideDrawerProps {
   className?: string;

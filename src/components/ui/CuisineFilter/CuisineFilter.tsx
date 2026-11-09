@@ -36,6 +36,7 @@ export const CuisineFilter = ({
           placeholder="Search cuisines"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          name="search-cuisine"
         />
       )}
       <div className={styles.pills}>

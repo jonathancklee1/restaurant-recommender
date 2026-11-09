@@ -1,3 +1,4 @@
+import type { LatLngExpression } from "leaflet";
 import type { PriceRangeType, Rating, RestaurantFilters, RestaurantType } from "./types";
 
 export const PRICE_OPTIONS: PriceRangeType[] = ["$", "$$", "$$$", "$$$$"];
@@ -27,6 +28,9 @@ export const COLUMN_HEADERS: string[] = [
 ];
 
 export const LS_KEY = "saved-restaurants";
+
+export const SYDNEY_CBD: LatLngExpression = [-33.8688, 151.2093];
+
 export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "1",

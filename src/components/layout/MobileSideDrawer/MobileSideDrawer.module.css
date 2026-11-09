@@ -33,3 +33,9 @@
     cursor: pointer;
   }
 }
+
+@media (min-width: 765px) {
+  .container {
+    display: none;
+  }
+}

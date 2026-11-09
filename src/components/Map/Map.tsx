@@ -3,21 +3,23 @@ import styles from "./Map.module.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression } from "leaflet";
+import { SYDNEY_CBD } from "../../utils/constants";
 interface MapProps {
   address: string | null;
+  className?: string;
 }
 // Component to smoothly pan the map when coordinates change
 function RecenterMap({ position }: { position: LatLngExpression }) {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.flyTo(position, 14);
+      map.flyTo(position, 16);
     }
   }, [position, map]);
   return null;
 }
-const SYDNEY_CBD: LatLngExpression = [-33.8688, 151.2093];
-export const Map = ({ address }: MapProps) => {
+
+export const Map = ({ address, className = "" }: MapProps) => {
   const [position, setPosition] = useState<LatLngExpression>(SYDNEY_CBD);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +62,7 @@ export const Map = ({ address }: MapProps) => {
   }, [address]);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className}`}>
       {loading && <div className={styles.loadingContainer}>Locating...</div>}
       {error && <div className={styles.error}>{error}</div>}
 
