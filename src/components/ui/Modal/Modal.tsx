@@ -1,7 +1,7 @@
 import styles from "./Modal.module.css";
 import { X } from "lucide-react";
 import type { RestaurantType } from "../../../utils/types";
-import { useContext, useRef, type MouseEvent } from "react";
+import { useContext, useRef, useState, type MouseEvent } from "react";
 import RestaurantForm from "../RestaurantForm/RestaurantForm";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 
@@ -15,7 +15,14 @@ export const modalId = "restaurant-modal";
 export const Modal = ({ className = "", initialPlace }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+  const [formVersion, setFormVersion] = useState(0);
   const closeModal = () => dialogRef.current?.close();
+
+  /** Closes the dialog and remounts the form so every input starts fresh. */
+  const resetAndClose = () => {
+    setFormVersion((v) => v + 1);
+    closeModal();
+  };
 
   const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
     if (e.target === e.currentTarget) closeModal();
@@ -33,9 +40,9 @@ export const Modal = ({ className = "", initialPlace }: ModalProps) => {
         <X />
       </button>
       <RestaurantForm
-        key={initialPlace?.id ?? "new"}
+        key={`${initialPlace?.id ?? "new"}-${formVersion}`}
         initialPlace={initialPlace}
-        onDone={closeModal}
+        onDone={resetAndClose}
       />
     </dialog>
   );

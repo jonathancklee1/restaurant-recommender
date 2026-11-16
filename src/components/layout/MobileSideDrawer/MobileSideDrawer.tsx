@@ -8,16 +8,19 @@ export interface MobileSideDrawerProps {
 }
 
 export const MobileSideDrawer = ({ className = "" }: MobileSideDrawerProps) => {
-  const { restaurantMap, setRestaurantMap } = useContext(RestaurantMapContext);
+  const { restaurantMap, isDrawerOpen, closeDrawer } = useContext(RestaurantMapContext);
   return (
-    <div className={`${styles.container} ${className}`} data-open={restaurantMap && true}>
+    <div className={`${styles.container} ${className}`} data-open={isDrawerOpen || undefined}>
       <div className={styles.mapHeader}>
         <h3>
           Location for <span> {restaurantMap?.name}</span>
         </h3>
-        <X onClick={() => setRestaurantMap(null)} />
+        <X onClick={closeDrawer} />
       </div>
-      <Map address={(restaurantMap && restaurantMap.address) || ""} />
+      <Map
+        address={(restaurantMap && restaurantMap.address) || ""}
+        latLong={restaurantMap?.latLong ?? null}
+      />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import { useContext, useState, type SubmitEvent } from "react";
+import styles from "./RestaurantForm.module.css";
 import Button from "../Button/Button";
 import Input from "../form/Input/Input";
+import AddressInput from "../form/AddressInput/AddressInput";
 import PriceRange from "../form/PriceRange/PriceRange";
 import RatingInput from "../form/RatingInput/RatingInput";
 import TextArea from "../form/TextArea/TextArea";
@@ -23,8 +25,7 @@ const createEmptyRestaurant = (): RestaurantType => ({
   visits: 0,
   comments: "",
   address: "",
-  lat: undefined,
-  lng: undefined,
+  latLong: undefined,
   addedAt: new Date().toISOString().slice(0, 10),
   lastVisitedAt: "",
   isFavourited: false,
@@ -41,7 +42,7 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
   );
 
   const updateField = <K extends keyof RestaurantType>(field: K, value: RestaurantType[K]) =>
-    setRestaurant({ ...restaurant, [field]: value });
+    setRestaurant((prev) => ({ ...prev, [field]: value }));
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,12 +51,11 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
     } else {
       dispatch(["ADD_RESTAURANT", restaurant]);
     }
-    setRestaurant(createEmptyRestaurant());
     onDone();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <h2>{initialPlace ? "Edit" : "Add"} Place</h2>
       <p>
         {initialPlace
@@ -89,14 +89,10 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
       </div>
       <div>
         <label htmlFor="address">Address</label>
-        <Input
-          type="text"
-          id="address"
-          name="address"
-          required
-          autoComplete="street-address"
-          value={restaurant.address}
-          onChange={(e) => updateField("address", e.target.value)}
+        <AddressInput
+          value={restaurant.address ?? ""}
+          onChange={(address) => updateField("address", address)}
+          setLatLong={(latLong) => updateField("latLong", latLong)}
         />
       </div>
       <div>
@@ -122,7 +118,12 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
         />
       </div>
 
-      <Button type="submit">{initialPlace ? "Save Changes" : "Add Place"}</Button>
+      <div className={styles.actions}>
+        <Button type="button" className={styles.cancel} onClick={onDone}>
+          Cancel
+        </Button>
+        <Button type="submit">{initialPlace ? "Save Changes" : "Add Place"}</Button>
+      </div>
     </form>
   );
 };

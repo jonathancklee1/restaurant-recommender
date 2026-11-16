@@ -77,10 +77,15 @@
   }
 }
 
+/*
+ * Each action has its own fixed-width column, so a missing one leaves an empty slot
+ * instead of shifting the rest. Fixed widths matter: every row is its own grid, and an
+ * empty `auto` column would collapse to zero.
+ */
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 2.5rem);
   gap: 0.5em;
-  width: 8em;
   > button {
     background: none;
     padding: 0.5em;
@@ -93,6 +98,18 @@
       stroke: var(--primary);
     }
   }
+}
+
+.mapAction {
+  grid-column: 1;
+}
+
+.editAction {
+  grid-column: 2;
+}
+
+.deleteAction {
+  grid-column: 3;
 }
 
 .nameCell {

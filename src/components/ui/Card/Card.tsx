@@ -24,7 +24,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   const [isCommentVisible, setCommentVisible] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { setRestaurantMap } = useContext(RestaurantMapContext);
+  const { showOnMap } = useContext(RestaurantMapContext);
   return (
     <div className={`${styles.container} ${className}`}>
       {imageUrl ? (
@@ -68,9 +68,12 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             <VisitsCounter visitId={restaurant.id} />
           </div>
           <div className={styles.buttonGroup}>
-            <Button className={styles.actionButton} onClick={() => setRestaurantMap(restaurant)}>
-              <MapPinned />
-            </Button>
+            {restaurant.latLong && (
+              <Button className={styles.actionButton} onClick={() => showOnMap(restaurant)}>
+                <MapPinned />
+              </Button>
+            )}
+
             <Button
               className={styles.actionButton}
               type="button"

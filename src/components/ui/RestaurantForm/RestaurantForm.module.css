@@ -1,0 +1,20 @@
+/* Red star after the label of any field whose input is required */
+.form > div:has(:required) > label::after {
+  content: " *";
+  color: red;
+}
+
+/* Cancel and submit side by side; `.form >` beats the modal's column layout for form divs */
+.form > .actions {
+  flex-direction: row;
+  gap: 0.5em;
+  justify-content: end;
+}
+
+.cancel {
+  background-color: var(--background-muted);
+  color: var(--text-primary);
+  &:hover {
+    background-color: var(--background-accent);
+  }
+}

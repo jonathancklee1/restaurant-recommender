@@ -13,7 +13,11 @@ export const DesktopMapContainer = ({ className = "" }: DesktopMapContainerProps
 
   return (
     <aside className={`${styles.container} ${className}`}>
-      <Map address={restaurantMap?.address ?? ""} className={styles.map} />
+      <Map
+        address={restaurantMap?.address ?? ""}
+        latLong={restaurantMap?.latLong ?? null}
+        className={styles.map}
+      />
     </aside>
   );
 };
