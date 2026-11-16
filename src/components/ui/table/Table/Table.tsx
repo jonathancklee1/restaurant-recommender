@@ -14,6 +14,7 @@ import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
 import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
+import { RestaurantMapContext } from "../../../../context/RestaurantMapProvider";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -30,6 +31,7 @@ export const Table = memo(function Table({
 }: TableProps) {
   const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
+  const { setRestaurantMap } = useContext(RestaurantMapContext);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -83,7 +85,7 @@ export const Table = memo(function Table({
               </td>
               <td className={styles.actionCell}>
                 <div className={styles.actions}>
-                  <Button>
+                  <Button onClick={() => setRestaurantMap(restaurant)}>
                     <MapPin />
                   </Button>
                   <Button

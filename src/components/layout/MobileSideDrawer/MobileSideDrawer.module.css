@@ -1,0 +1,41 @@
+.container {
+  width: 90dvw;
+  height: calc(100dvh - 80px);
+  background-color: var(--background-primary);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  padding: 1em;
+  transform: translateX(100%);
+  background-color: var(--background-secondary);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  &[data-open] {
+    transform: translateX(0);
+  }
+}
+
+.mapHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding: 0.5rem;
+
+  span,
+  svg {
+    color: var(--primary);
+    flex-shrink: 0;
+    text-wrap: wrap;
+  }
+  svg {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 765px) {
+  .container {
+    display: none;
+  }
+}

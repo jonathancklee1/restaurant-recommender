@@ -1,5 +1,7 @@
 import Navbar from "./components/layout/Navbar/Navbar";
-import TableContainer from "./components/layout/TableContainer/TableContainer";
+import MainContent from "./components/layout/MainContent/MainContent";
+import MobileSideDrawer from "./components/layout/MobileSideDrawer/MobileSideDrawer";
+import { RestaurantMapProvider } from "./context/RestaurantMapProvider";
 import { RestaurantProvider } from "./context/RestaurantProvider";
 import { SelectedRestaurantProvider } from "./context/SelectedRestaurantProvider";
 
@@ -8,10 +10,13 @@ function App() {
     <>
       <RestaurantProvider>
         <SelectedRestaurantProvider>
-          <main>
-            <Navbar />
-            <TableContainer />
-          </main>
+          <RestaurantMapProvider>
+            <main>
+              <Navbar />
+              <MainContent />
+              <MobileSideDrawer />
+            </main>
+          </RestaurantMapProvider>
         </SelectedRestaurantProvider>
       </RestaurantProvider>
     </>

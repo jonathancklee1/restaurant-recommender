@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  height: calc(100dvh - 150px);
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.loadingContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.39);
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.error {
+  position: absolute;
+  z-index: 1000;
+  right: 1em;
+  top: 1em;
+  color: var(--text-secondary);
+  background: red;
+  padding: 1em;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}

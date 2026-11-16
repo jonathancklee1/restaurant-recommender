@@ -1,17 +1,19 @@
 .container {
   display: grid;
   gap: 1.25em;
+  > section:last-child {
+    grid-column: span 2;
+  }
 }
 
 .stacked {
   grid-template-columns: minmax(0, 1fr);
 }
 
-/* Price and rating size to their pills; cuisine takes the remaining width */
 .row {
   grid-template-columns: minmax(0, 1fr);
   @media (min-width: 1024px) {
-    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-columns: auto auto;
     gap: 2.5em;
     align-items: start;
   }
