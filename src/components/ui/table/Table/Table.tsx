@@ -14,7 +14,7 @@ import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
 import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
-import { RestaurantMapContext } from "../../../../context/RestaurantMapProvider";
+import { RestaurantMapActionsContext } from "../../../../context/RestaurantMapProvider";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -31,7 +31,7 @@ export const Table = memo(function Table({
 }: TableProps) {
   const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { showOnMap } = useContext(RestaurantMapContext);
+  const { showOnMap } = useContext(RestaurantMapActionsContext);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -86,7 +86,7 @@ export const Table = memo(function Table({
               <td className={styles.actionCell}>
                 <div className={styles.actions}>
                   {restaurant.latLong && (
-                    <Button className={styles.mapAction} onClick={() => showOnMap(restaurant)}>
+                    <Button className={styles.mapAction} onClick={() => showOnMap(restaurant.id)}>
                       <MapPin />
                     </Button>
                   )}

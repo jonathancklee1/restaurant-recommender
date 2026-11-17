@@ -257,3 +257,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
     addedAt: "2026-11-06",
   },
 ];
+
+/** Matches the 765px desktop breakpoint used in the CSS. */
+export const DESKTOP_QUERY = "(min-width: 765px)";

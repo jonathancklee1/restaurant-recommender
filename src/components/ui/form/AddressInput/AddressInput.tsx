@@ -45,10 +45,11 @@ export const AddressInput = ({
           ) : (
             <>
               <li key="header">Set Pin to</li>
-              {results.map((result) => {
+              {results.map((result, index) => {
                 return (
                   <li
-                    key={result.label}
+                    // Labels can repeat, and each search replaces the whole list.
+                    key={index}
                     onClick={() => {
                       setLatLong(result.latLong);
                       setOpenDropDown(false);
