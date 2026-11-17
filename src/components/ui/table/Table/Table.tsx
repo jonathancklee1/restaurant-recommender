@@ -108,7 +108,7 @@ export const Table = memo(function Table({
         <tfoot>
           <tr>
             <td colSpan={COLUMN_HEADERS.length} className={styles.totalCell}>
-              Showing {listItems.length} restaurants in Sydney
+              Showing {listItems.length} restaurants
             </td>
           </tr>
         </tfoot>

@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
-import { SYDNEY_CBD } from "../../utils/constants";
+import { DEFAULT_MAP_CENTER } from "../../utils/constants";
 import { TriangleAlert } from "lucide-react";
 import type { LatLong } from "../../utils/types";
 
@@ -52,7 +52,7 @@ export const Map = ({ address, latLong, className = "" }: MapProps) => {
       )}
 
       <MapContainer
-        center={latLong ?? SYDNEY_CBD}
+        center={latLong ?? DEFAULT_MAP_CENTER}
         zoom={latLong ? PIN_ZOOM : 13}
         className={styles.map}
       >

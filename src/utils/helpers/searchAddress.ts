@@ -11,7 +11,6 @@ export async function searchAddress(query: string): Promise<AddressResult[]> {
     url.searchParams.append("q", query);
     url.searchParams.append("format", "jsonv2");
     url.searchParams.append("limit", "5");
-    url.searchParams.append("countrycodes", "au");
 
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Address search failed: ${response.status}`);

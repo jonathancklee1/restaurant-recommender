@@ -60,7 +60,7 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
       <p>
         {initialPlace
           ? "Edit details of your saved restaurant"
-          : "Save a new restaurant to your Sydney wishlist"}
+          : "Save a new restaurant to your wishlist"}
       </p>
 
       <div>

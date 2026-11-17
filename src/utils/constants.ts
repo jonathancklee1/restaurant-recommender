@@ -29,7 +29,8 @@ export const COLUMN_HEADERS: string[] = [
 
 export const LS_KEY = "saved-restaurants";
 
-export const SYDNEY_CBD: LatLngExpression = [-33.8688, 151.2093];
+/** Where the map starts before a restaurant is chosen (near the sample restaurants). */
+export const DEFAULT_MAP_CENTER: LatLngExpression = [-33.8688, 151.2093];
 
 export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
