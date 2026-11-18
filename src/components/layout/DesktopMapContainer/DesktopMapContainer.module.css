@@ -1,18 +1,11 @@
 .container {
-  display: none;
+  flex: 1;
+  position: sticky;
+  top: 110px;
+  height: calc(100dvh - 300px);
 }
 
-@media (min-width: 765px) {
-  .container {
-    display: block;
-    flex: 1;
-    position: sticky;
-    top: 110px;
-    height: calc(100dvh - 300px);
-  }
-
-  .container .map {
-    height: 100%;
-    border-radius: var(--border-radius);
-  }
+.container .map {
+  height: 100%;
+  border-radius: var(--border-radius);
 }

@@ -11,7 +11,7 @@ import type { RestaurantType } from "../../../utils/types";
 import { modalId } from "../Modal/Modal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
-import { RestaurantMapContext } from "../../../context/RestaurantMapProvider";
+import { RestaurantMapActionsContext } from "../../../context/RestaurantMapProvider";
 
 export interface CardProps {
   children?: React.ReactNode;
@@ -24,7 +24,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
   const [isCommentVisible, setCommentVisible] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { setRestaurantMap } = useContext(RestaurantMapContext);
+  const { showOnMap } = useContext(RestaurantMapActionsContext);
   return (
     <div className={`${styles.container} ${className}`}>
       {imageUrl ? (
@@ -68,9 +68,12 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
             <VisitsCounter visitId={restaurant.id} />
           </div>
           <div className={styles.buttonGroup}>
-            <Button className={styles.actionButton} onClick={() => setRestaurantMap(restaurant)}>
-              <MapPinned />
-            </Button>
+            {restaurant.latLong && (
+              <Button className={styles.actionButton} onClick={() => showOnMap(restaurant.id)}>
+                <MapPinned />
+              </Button>
+            )}
+
             <Button
               className={styles.actionButton}
               type="button"

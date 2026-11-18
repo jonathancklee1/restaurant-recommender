@@ -12,6 +12,9 @@ export interface RestaurantFilters {
   cuisines: string[];
 }
 
+/** Map coordinates as [latitude, longitude]. */
+export type LatLong = [lat: number, lng: number];
+
 /** A restaurant row in the table. */
 export interface RestaurantType {
   id: string;
@@ -23,8 +26,7 @@ export interface RestaurantType {
   visits?: number;
   comments?: string;
   address?: string;
-  lat?: number;
-  lng?: number;
+  latLong?: LatLong;
   addedAt?: string; // YYYY-MM-DD
   lastVisitedAt?: string;
   isFavourited: boolean;

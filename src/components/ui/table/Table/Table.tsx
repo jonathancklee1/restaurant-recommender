@@ -14,7 +14,7 @@ import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
 import { sortFavouriteRestaurants } from "../../../../utils/helpers/sortFavouriteRestaurants";
-import { RestaurantMapContext } from "../../../../context/RestaurantMapProvider";
+import { RestaurantMapActionsContext } from "../../../../context/RestaurantMapProvider";
 
 export interface TableProps {
   children?: React.ReactNode;
@@ -31,7 +31,7 @@ export const Table = memo(function Table({
 }: TableProps) {
   const listItems = sortFavouriteRestaurants(filterRestaurants(restaurants, deferredFilters));
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const { setRestaurantMap } = useContext(RestaurantMapContext);
+  const { showOnMap } = useContext(RestaurantMapActionsContext);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -85,10 +85,13 @@ export const Table = memo(function Table({
               </td>
               <td className={styles.actionCell}>
                 <div className={styles.actions}>
-                  <Button onClick={() => setRestaurantMap(restaurant)}>
-                    <MapPin />
-                  </Button>
+                  {restaurant.latLong && (
+                    <Button className={styles.mapAction} onClick={() => showOnMap(restaurant.id)}>
+                      <MapPin />
+                    </Button>
+                  )}
                   <Button
+                    className={styles.editAction}
                     type="button"
                     command="show-modal"
                     commandfor={modalId}
@@ -96,7 +99,7 @@ export const Table = memo(function Table({
                   >
                     <Pencil />
                   </Button>
-                  <DeleteButton restaurant={restaurant} />
+                  <DeleteButton className={styles.deleteAction} restaurant={restaurant} />
                 </div>
               </td>
             </tr>
@@ -105,7 +108,7 @@ export const Table = memo(function Table({
         <tfoot>
           <tr>
             <td colSpan={COLUMN_HEADERS.length} className={styles.totalCell}>
-              Showing {listItems.length} restaurants in Sydney
+              Showing {listItems.length} restaurants
             </td>
           </tr>
         </tfoot>

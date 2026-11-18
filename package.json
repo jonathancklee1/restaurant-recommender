@@ -9,7 +9,8 @@
     "lint": "vp lint",
     "preview": "vp preview",
     "prepare": "vp config",
-    "gen": "plop"
+    "gen": "plop",
+    "test": "vp test"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
