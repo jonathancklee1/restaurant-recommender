@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.constraintHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: bold;
+  span:first-child {
+    text-transform: uppercase;
+  }
+}
+.constraintPillContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5em;
+  > * {
+    width: 100%;
+  }
+}
