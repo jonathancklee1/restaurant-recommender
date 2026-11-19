@@ -261,3 +261,5 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
 
 /** Matches the 765px desktop breakpoint used in the CSS. */
 export const DESKTOP_QUERY = "(min-width: 765px)";
+
+export const randomiserModalId = "randomiser-modal";

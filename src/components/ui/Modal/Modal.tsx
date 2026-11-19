@@ -1,49 +1,33 @@
 import styles from "./Modal.module.css";
 import { X } from "lucide-react";
-import type { RestaurantType } from "../../../utils/types";
-import { useContext, useRef, useState, type MouseEvent } from "react";
-import RestaurantForm from "../RestaurantForm/RestaurantForm";
-import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
+import type { MouseEvent, ReactNode, Ref } from "react";
 
 export interface ModalProps {
+  id: string;
+  children: ReactNode;
   className?: string;
-  initialPlace?: RestaurantType | null;
+  ref?: Ref<HTMLDialogElement>;
+  onClose?: () => void;
 }
-export const modalId = "restaurant-modal";
 
-/** Dialog shell for adding or editing a restaurant. */
-export const Modal = ({ className = "", initialPlace }: ModalProps) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
-  const [formVersion, setFormVersion] = useState(0);
-  const closeModal = () => dialogRef.current?.close();
-
-  /** Closes the dialog and remounts the form so every input starts fresh. */
-  const resetAndClose = () => {
-    setFormVersion((v) => v + 1);
-    closeModal();
-  };
-
+/** Generic dialog shell with a close button. Closes on backdrop click. */
+export const Modal = ({ id, children, className = "", ref, onClose }: ModalProps) => {
   const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
-    if (e.target === e.currentTarget) closeModal();
+    if (e.target === e.currentTarget) e.currentTarget.close();
   };
 
   return (
     <dialog
-      id={modalId}
+      id={id}
       className={styles.container + " " + className}
-      ref={dialogRef}
+      ref={ref}
       onClick={handleBackdropClick}
-      onClose={() => setSelectedRestaurant(null)}
+      onClose={onClose}
     >
-      <button type="button" command="close" commandfor={modalId} className={styles.closeButton}>
+      <button type="button" command="close" commandfor={id} className={styles.closeButton}>
         <X />
       </button>
-      <RestaurantForm
-        key={`${initialPlace?.id ?? "new"}-${formVersion}`}
-        initialPlace={initialPlace}
-        onDone={resetAndClose}
-      />
+      {children}
     </dialog>
   );
 };

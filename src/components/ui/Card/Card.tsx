@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import type { RestaurantType } from "../../../utils/types";
-import { modalId } from "../Modal/Modal";
+import { restaurantModalId } from "../RestaurantModal/RestaurantModal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 import { RestaurantMapActionsContext } from "../../../context/RestaurantMapProvider";
@@ -78,7 +78,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
               className={styles.actionButton}
               type="button"
               command="show-modal"
-              commandfor={modalId}
+              commandfor={restaurantModalId}
               onClick={() => {
                 setSelectedRestaurant(restaurant);
               }}

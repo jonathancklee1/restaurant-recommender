@@ -9,7 +9,7 @@ import VisitsCounter from "../../../VisitsCounter/VisitsCounter";
 import Button from "../../Button/Button";
 import FavouriteButton from "../../FavouriteButton/FavouriteButton";
 import DeleteButton from "../../DeleteButton/DeleteButton";
-import { modalId } from "../../Modal/Modal";
+import { restaurantModalId } from "../../RestaurantModal/RestaurantModal";
 import { getSuburb } from "../../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../../context/SelectedRestaurantProvider";
 import { filterRestaurants } from "../../../../utils/helpers/filterRestaurants";
@@ -94,7 +94,7 @@ export const Table = memo(function Table({
                     className={styles.editAction}
                     type="button"
                     command="show-modal"
-                    commandfor={modalId}
+                    commandfor={restaurantModalId}
                     onClick={() => setSelectedRestaurant(restaurant)}
                   >
                     <Pencil />

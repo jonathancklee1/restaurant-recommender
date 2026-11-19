@@ -1,6 +1,6 @@
 import Button from "../../ui/Button/Button";
 import Logo from "../../ui/Logo/Logo";
-import { modalId } from "../../ui/Modal/Modal";
+import { restaurantModalId } from "../../ui/RestaurantModal/RestaurantModal";
 import styles from "./Navbar.module.css";
 import { useContext } from "react";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
@@ -22,7 +22,7 @@ function Navbar() {
         <Button
           type="button"
           command="show-modal"
-          commandfor={modalId}
+          commandfor={restaurantModalId}
           onClick={() => setSelectedRestaurant(null)}
         >
           Add Restaurant

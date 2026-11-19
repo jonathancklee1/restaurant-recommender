@@ -1,22 +1,25 @@
-import React, { useState } from "react";
 import styles from "./RandomiserConstraintContainer.module.css";
 import FilterPill from "../FilterPill/FilterPill";
+import type { ReactNode } from "react";
 
-export interface RandomiserConstraintContainerProps {
-  children?: React.ReactNode;
+export interface RandomiserConstraintContainerProps<T extends string> {
+  children?: ReactNode;
   className?: string;
   constraintName: string;
   constraintSubtext: string;
-  constraintOptions: string[];
+  constraintOptions: T[];
+  constraint: T | null;
+  handleChange: (value: T | null) => void;
 }
 
-export const RandomiserConstraintContainer = ({
+export const RandomiserConstraintContainer = <T extends string>({
   className = "",
   constraintName,
   constraintSubtext,
   constraintOptions,
-}: RandomiserConstraintContainerProps) => {
-  const [selectedOption, setSelectedOption] = useState("");
+  constraint,
+  handleChange,
+}: RandomiserConstraintContainerProps<T>) => {
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={`${styles.constraintHeader}`}>
@@ -29,9 +32,9 @@ export const RandomiserConstraintContainer = ({
             <FilterPill
               key={option}
               onClick={() => {
-                setSelectedOption(option);
+                handleChange(constraint === option ? null : option);
               }}
-              selected={selectedOption === option}
+              selected={option === "All" && constraint === null ? true : constraint === option}
             >
               {option}
             </FilterPill>
