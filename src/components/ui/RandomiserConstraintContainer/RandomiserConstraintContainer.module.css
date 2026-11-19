@@ -23,3 +23,19 @@
     width: 100%;
   }
 }
+
+@media (min-width: 765px) {
+  .container {
+    flex-direction: row;
+    gap: 0.5em;
+    button {
+      padding: 0.4em 0.8em;
+      border-radius: var(--border-radius);
+    }
+  }
+  .constraintHeader {
+    > span:last-child {
+      display: none;
+    }
+  }
+}

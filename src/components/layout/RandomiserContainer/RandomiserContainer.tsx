@@ -4,6 +4,8 @@ import styles from "./RandomiserContainer.module.css";
 import { useState } from "react";
 import Pill from "../../ui/Pill/Pill";
 import RandomiserConstraintContainer from "../../ui/RandomiserConstraintContainer/RandomiserConstraintContainer";
+import { useMediaQuery } from "../../../utils/hooks/useMediaQuery";
+import { DESKTOP_QUERY } from "../../../utils/constants";
 
 export interface RandomiserContainerProps {
   className?: string;
@@ -11,9 +13,12 @@ export interface RandomiserContainerProps {
 
 export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps) => {
   const [isConstraintsExpanded, setIsConstraintsExpanded] = useState(false);
+  const isDesktop = useMediaQuery(DESKTOP_QUERY);
+  const isExpanded = isDesktop || isConstraintsExpanded;
   return (
     <div className={`${styles.container} ${className}`}>
-      <div className={styles.mobileHeader}>
+      <p className={styles.title}>Pick for me</p>
+      <div className={styles.header}>
         <Button>Pick a Restaurant</Button>
         <button
           type="button"
@@ -21,14 +26,14 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
           aria-expanded={isConstraintsExpanded}
           onClick={() => setIsConstraintsExpanded((prev) => !prev)}
         >
-          {isConstraintsExpanded ? <Minus /> : <Plus />}
+          {isConstraintsExpanded ? <Minus size={14} /> : <Plus size={14} />}
           {isConstraintsExpanded ? "Remove" : "Set "}
           {" Constraints"}
         </button>
       </div>
       <div
-        className={`${styles.constraintsContainer} ${isConstraintsExpanded ? "" : styles.collapsed}`}
-        inert={!isConstraintsExpanded}
+        className={`${styles.constraintsContainer} ${isExpanded ? "" : styles.collapsed}`}
+        inert={!isExpanded}
       >
         <div className={styles.randomiserContent}>
           <p>Can't decide where to eat? Let fate pick your next feast!</p>

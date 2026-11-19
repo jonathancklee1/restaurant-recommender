@@ -17,8 +17,10 @@ export const MainContent = ({ className = "" }: MainContentProps) => {
   return (
     <div className={`${styles.container} ${className}`}>
       <RandomiserContainer />
-      <TableContainer className={styles.table} />
-      {isDesktop ? <DesktopMapContainer /> : <MobileSideDrawer />}
+      <div className={styles.tableAndMapContainer}>
+        <TableContainer className={styles.table} />
+        {isDesktop ? <DesktopMapContainer /> : <MobileSideDrawer />}
+      </div>
     </div>
   );
 };

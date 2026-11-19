@@ -1,13 +1,14 @@
 .container {
   display: block;
-  overflow-x: auto;
+  overflow: auto;
+  min-height: 0;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   border-radius: var(--border-radius);
-  margin-top: 1em;
+  padding-top: 1em;
   thead,
   tbody tr th,
   tfoot,
@@ -40,6 +41,18 @@
   tfoot td {
     background: var(--background-secondary);
     padding: 1em;
+  }
+  /* Stay visible while the table scrolls; above the sticky action column. */
+  thead,
+  tfoot {
+    position: sticky;
+    z-index: 4;
+  }
+  thead {
+    top: 0;
+  }
+  tfoot {
+    bottom: 0;
   }
   td {
     padding: 0.5em 1em;

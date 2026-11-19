@@ -1,5 +1,6 @@
 .container {
-  display: block;
+  display: grid;
+  place-items: center;
   padding: 0.3em 1em;
   border-radius: 30px;
   width: fit-content;

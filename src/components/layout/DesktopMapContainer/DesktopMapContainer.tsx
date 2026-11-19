@@ -7,7 +7,6 @@ export interface DesktopMapContainerProps {
   className?: string;
 }
 
-/** Full-height map beside the table on desktop, showing the chosen restaurant. */
 export const DesktopMapContainer = ({ className = "" }: DesktopMapContainerProps) => {
   const { restaurantMap } = useContext(RestaurantMapContext);
 
