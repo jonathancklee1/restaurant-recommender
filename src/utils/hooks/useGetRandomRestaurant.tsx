@@ -29,5 +29,5 @@ export function useGetRandomRestaurant(constraints: ConstraintType) {
     );
   }
 
-  return { getRandomRestaurant, randomRestaurant };
+  return { getRandomRestaurant, randomRestaurant, filteredRestaurants };
 }

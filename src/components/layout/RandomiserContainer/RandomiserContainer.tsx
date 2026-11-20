@@ -42,7 +42,19 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
   }
   console.log(constraints);
 
-  const { getRandomRestaurant, randomRestaurant } = useGetRandomRestaurant(constraints);
+  const { getRandomRestaurant, randomRestaurant, filteredRestaurants } =
+    useGetRandomRestaurant(constraints);
+
+  const [isLoading, setIsLoading] = useState(false);
+  function handlePickRestaurantClick() {
+    setIsLoading(true);
+    console.log("loading");
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log("not loading");
+    }, 3000);
+    getRandomRestaurant();
+  }
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -52,9 +64,7 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
           type="button"
           command="show-modal"
           commandfor={randomiserModalId}
-          onClick={() => {
-            getRandomRestaurant();
-          }}
+          onClick={handlePickRestaurantClick}
         >
           Pick a Restaurant
         </Button>
@@ -110,6 +120,8 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
       <RandomiserModal
         constraints={constraints}
         randomRestaurant={randomRestaurant}
+        isLoading={isLoading}
+        candidateNames={filteredRestaurants.map((restaurant) => restaurant.name)}
       ></RandomiserModal>
     </div>
   );
