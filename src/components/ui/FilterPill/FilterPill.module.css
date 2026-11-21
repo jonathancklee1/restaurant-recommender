@@ -9,6 +9,10 @@
   border: none;
   min-width: fit-content;
   text-wrap: nowrap;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .primary {

@@ -1,4 +1,4 @@
-import { Plus, Minus, LocateIcon } from "lucide-react";
+import { Plus, Minus, LocateIcon, LoaderCircle } from "lucide-react";
 import Button from "../../ui/Button/Button";
 import styles from "./RandomiserContainer.module.css";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import { DESKTOP_QUERY, randomiserModalId } from "../../../utils/constants";
 import type { PriceRangeType, VisitStatusType } from "../../../utils/types";
 import RandomiserModal from "../../ui/RandomiserModal/RandomiserModal";
 import { useGetRandomRestaurant } from "../../../utils/hooks/useGetRandomRestaurant";
+import { getLocation } from "../../../utils/helpers/getLocation";
 
 export interface RandomiserContainerProps {
   className?: string;
@@ -17,12 +18,18 @@ export interface ConstraintType {
   distance: string | null;
   price: PriceRangeType | null;
   scope: VisitStatusType;
+  location: {
+    lat: number;
+    lon: number;
+    suburb: string;
+  } | null;
 }
 export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps) => {
   const initialConstraintState = {
     distance: null,
     price: null,
     scope: null,
+    location: null,
   };
   const [isConstraintsExpanded, setIsConstraintsExpanded] = useState(false);
   const isDesktop = useMediaQuery(DESKTOP_QUERY);
@@ -48,14 +55,27 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
   const [isLoading, setIsLoading] = useState(false);
   function handlePickRestaurantClick() {
     setIsLoading(true);
-    console.log("loading");
     setTimeout(() => {
       setIsLoading(false);
-      console.log("not loading");
     }, 3000);
     getRandomRestaurant();
   }
 
+  const [isLocating, setIsLocating] = useState(false);
+  async function handleLocationClick() {
+    setIsLocating(true);
+    try {
+      const position = await getLocation();
+      setConstraints((prev) => ({ ...prev, location: position }));
+    } finally {
+      setIsLocating(false);
+    }
+  }
+
+  function locationLabel() {
+    if (isLocating) return "Retrieving location";
+    return constraints.location ? constraints.location.suburb : "Get Your location";
+  }
   return (
     <div className={`${styles.container} ${className}`}>
       <p className={styles.title}>Pick for me</p>
@@ -89,9 +109,13 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
         <div className={styles.randomiserContent}>
           <p>Can't decide where to eat? Let fate pick your next feast!</p>
           <Pill variant="primary">
-            <div className={styles.locationPill}>
-              <LocateIcon size={16} />
-              <span>Your location</span>
+            <div className={styles.locationPill} onClick={handleLocationClick}>
+              {isLocating ? (
+                <LoaderCircle size={16} className={styles.spinner} />
+              ) : (
+                <LocateIcon size={16} />
+              )}
+              <span>{locationLabel()}</span>
             </div>
           </Pill>
           <RandomiserConstraintContainer
@@ -100,6 +124,7 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
             constraintOptions={["1 km", "3 km", "5 km", "10 km"]}
             handleChange={setDistance}
             constraint={constraints.distance}
+            disabled={!constraints.location}
           />
           <RandomiserConstraintContainer
             constraintName="Price Limit"

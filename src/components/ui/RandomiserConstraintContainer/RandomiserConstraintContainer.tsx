@@ -9,6 +9,8 @@ export interface RandomiserConstraintContainerProps<T extends string> {
   constraintSubtext: string;
   constraintOptions: T[];
   constraint: T | null;
+  /** Blocks picking an option, e.g. distance before the user's location is known. */
+  disabled?: boolean;
   handleChange: (value: T | null) => void;
 }
 
@@ -19,6 +21,7 @@ export const RandomiserConstraintContainer = <T extends string>({
   constraintOptions,
   constraint,
   handleChange,
+  disabled = false,
 }: RandomiserConstraintContainerProps<T>) => {
   return (
     <div className={`${styles.container} ${className}`}>
@@ -31,6 +34,7 @@ export const RandomiserConstraintContainer = <T extends string>({
           return (
             <FilterPill
               key={option}
+              disabled={disabled}
               onClick={() => {
                 handleChange(constraint === option ? null : option);
               }}

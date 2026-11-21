@@ -2,7 +2,8 @@ import styles from "./RandomiserModal.module.css";
 import Modal from "../Modal/Modal";
 import Pill from "../Pill/Pill";
 import Rating from "../Rating/Rating";
-import { CalendarCheck, MapPin } from "lucide-react";
+import { CalendarCheck, MapPin, UtensilsCrossed } from "lucide-react";
+import Button from "../Button/Button";
 import type { ConstraintType } from "../../layout/RandomiserContainer/RandomiserContainer";
 import { randomiserModalId } from "../../../utils/constants";
 
@@ -38,10 +39,48 @@ export const RandomiserModal = ({
         ) : randomRestaurant ? (
           <RestaurantDetails restaurant={randomRestaurant} />
         ) : (
-          <p>No restaurants match your constraints.</p>
+          <NoMatch constraints={constraints} />
         )}
       </div>
     </Modal>
+  );
+};
+
+/** Human-readable labels for the constraints currently applied. */
+function getActiveConstraintLabels({ distance, price, scope, location }: ConstraintType) {
+  const labels = [];
+  if (distance && location) labels.push(`Within ${distance} of ${location.suburb}`);
+  if (price) labels.push(`Up to ${price}`);
+  if (scope) labels.push(scope);
+  return labels;
+}
+
+const NoMatch = ({ constraints }: { constraints: ConstraintType }) => {
+  const labels = getActiveConstraintLabels(constraints);
+
+  return (
+    <div className={styles.noMatch}>
+      <div className={styles.noMatchIcon}>
+        <UtensilsCrossed size={32} />
+      </div>
+      <p className={styles.eyebrow}>No match</p>
+      <h3>Nothing fits the bill</h3>
+      <p className={styles.noMatchText}>
+        No restaurants match your constraints. Try loosening them and spin again.
+      </p>
+      {labels.length > 0 && (
+        <div className={styles.noMatchPills}>
+          {labels.map((label) => (
+            <Pill key={label} variant="secondary">
+              {label}
+            </Pill>
+          ))}
+        </div>
+      )}
+      <Button type="button" command="close" commandfor={randomiserModalId}>
+        Adjust constraints
+      </Button>
+    </div>
   );
 };
 
