@@ -2,7 +2,7 @@ import styles from "./RandomiserModal.module.css";
 import Modal from "../Modal/Modal";
 import Pill from "../Pill/Pill";
 import Rating from "../Rating/Rating";
-import { CalendarCheck, MapPin, UtensilsCrossed } from "lucide-react";
+import { CalendarCheck, MapPin, SlidersHorizontal, UtensilsCrossed } from "lucide-react";
 import Button from "../Button/Button";
 import type { ConstraintType } from "../../layout/RandomiserContainer/RandomiserContainer";
 import { randomiserModalId } from "../../../utils/constants";
@@ -74,7 +74,7 @@ const NoMatch = ({ constraints }: { constraints: ConstraintType }) => {
         </div>
       )}
       <Button type="button" command="close" commandfor={randomiserModalId}>
-        Adjust constraints
+        <SlidersHorizontal size={18} /> Adjust constraints
       </Button>
     </div>
   );

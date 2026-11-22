@@ -1,4 +1,4 @@
-import { Plus, Minus, LocateIcon, LoaderCircle } from "lucide-react";
+import { Plus, Minus, LocateIcon, LoaderCircle, Dices } from "lucide-react";
 import Button from "../../ui/Button/Button";
 import styles from "./RandomiserContainer.module.css";
 import { useState } from "react";
@@ -88,7 +88,7 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
           commandfor={randomiserModalId}
           onClick={handlePickRestaurantClick}
         >
-          Pick a Restaurant
+          <Dices size={18} /> Pick a Restaurant
         </Button>
         <button
           type="button"

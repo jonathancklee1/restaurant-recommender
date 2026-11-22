@@ -34,7 +34,7 @@ export const DeleteButton = ({ className = "", restaurant }: DeleteButtonProps) 
             commandfor={dialogId}
             onClick={() => dispatch(["REMOVE_RESTAURANT", restaurant.id])}
           >
-            Delete
+            <Trash size={18} /> Delete
           </Button>
         </div>
       </dialog>

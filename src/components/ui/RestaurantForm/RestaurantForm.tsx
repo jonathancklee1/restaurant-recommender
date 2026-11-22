@@ -1,4 +1,5 @@
 import { useContext, useState, type SubmitEvent } from "react";
+import { Check, Plus } from "lucide-react";
 import styles from "./RestaurantForm.module.css";
 import Button from "../Button/Button";
 import Input from "../form/Input/Input";
@@ -121,7 +122,10 @@ export const RestaurantForm = ({ initialPlace, onDone }: RestaurantFormProps) =>
         <Button type="button" className={styles.cancel} onClick={onDone}>
           Cancel
         </Button>
-        <Button type="submit">{initialPlace ? "Save Changes" : "Add Place"}</Button>
+        <Button type="submit">
+          {initialPlace ? <Check size={18} /> : <Plus size={18} />}
+          {initialPlace ? "Save Changes" : "Add Place"}
+        </Button>
       </div>
     </form>
   );

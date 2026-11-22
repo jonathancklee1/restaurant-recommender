@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import Button from "../../ui/Button/Button";
 import Logo from "../../ui/Logo/Logo";
 import { restaurantModalId } from "../../ui/RestaurantModal/RestaurantModal";
@@ -25,7 +26,7 @@ function Navbar() {
           commandfor={restaurantModalId}
           onClick={() => setSelectedRestaurant(null)}
         >
-          Add Restaurant
+          <Plus size={18} /> Add Restaurant
         </Button>
       </div>
     </nav>
