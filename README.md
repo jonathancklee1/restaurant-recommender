@@ -2,6 +2,10 @@
 
 A restaurant bucket list with a "where tonight?" randomiser. Keep track of places you want to try and places you've been, see them on a map, and let the app pick where to eat.
 
+[Live Site](https://restaurant-recommender-app-beryl.vercel.app/)
+
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/815a6042-7649-4c2a-94d9-64df2672dbd0" />
+
 ## Features
 
 ### Restaurant list
