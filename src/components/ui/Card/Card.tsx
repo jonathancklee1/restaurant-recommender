@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import type { RestaurantType } from "../../../utils/types";
-import { modalId } from "../Modal/Modal";
+import { restaurantModalId } from "../RestaurantModal/RestaurantModal";
 import { getSuburb } from "../../../utils/helpers/getSuburb";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 import { RestaurantMapActionsContext } from "../../../context/RestaurantMapProvider";
@@ -20,19 +20,13 @@ export interface CardProps {
 }
 
 export const Card = ({ className = "", restaurant }: CardProps) => {
-  const { name, imageUrl, cuisine, address, rating, price, visits, comments } = restaurant;
+  const { name, cuisine, address, rating, price, visits, comments } = restaurant;
   const [isCommentVisible, setCommentVisible] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   const { showOnMap } = useContext(RestaurantMapActionsContext);
   return (
     <div className={`${styles.container} ${className}`}>
-      {imageUrl ? (
-        <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
-      ) : (
-        <div className={styles.emptyImage}></div>
-      )}
-
       <div className={styles.content}>
         <div className={styles.detailsContainer}>
           <div>
@@ -78,7 +72,7 @@ export const Card = ({ className = "", restaurant }: CardProps) => {
               className={styles.actionButton}
               type="button"
               command="show-modal"
-              commandfor={modalId}
+              commandfor={restaurantModalId}
               onClick={() => {
                 setSelectedRestaurant(restaurant);
               }}

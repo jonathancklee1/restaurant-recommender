@@ -1,0 +1,98 @@
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem;
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.container {
+  border-top: 3px solid var(--primary);
+}
+
+.modalContent .map {
+  flex-shrink: 0;
+  height: 14rem;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.subtitle {
+  display: flex;
+  gap: 0.25em;
+  font-weight: bold;
+}
+.subtitleRatingBox {
+  display: flex;
+  gap: 0.25em;
+  font-weight: bold;
+}
+
+.pillRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.iconRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.comments {
+  background-color: var(--background-muted);
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+.noMatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0.5rem 0.5rem;
+  text-align: center;
+}
+
+.noMatchIcon {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background-color: var(--background-accent);
+  color: var(--primary);
+}
+
+.noMatchText {
+  max-width: 30ch;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+.noMatchPills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.mapLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  &:hover {
+    color: var(--primary);
+  }
+}

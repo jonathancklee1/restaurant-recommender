@@ -1,10 +1,27 @@
+.form {
+  width: 100%;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-weight: 600;
+    margin-bottom: 0.35em;
+  }
+}
+
 /* Red star after the label of any field whose input is required */
 .form > div:has(:required) > label::after {
   content: " *";
   color: var(--error);
 }
 
-/* Cancel and submit side by side; `.form >` beats the modal's column layout for form divs */
+/* Cancel and submit side by side; `.form > .actions` beats the `.form > div` column layout */
 .form > .actions {
   flex-direction: row;
   gap: 0.5em;

@@ -12,8 +12,15 @@
   padding-top: 2em;
 }
 @media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  /* Shrinks to the height left after the filters; the table inside scrolls. */
   .table {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
   .mobileList {
     display: none;

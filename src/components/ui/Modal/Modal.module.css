@@ -6,22 +6,6 @@
   &[open] {
     display: flex;
   }
-  form {
-    width: 100%;
-    padding: 20px;
-    border-radius: var(--border-radius);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    > div {
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 0.35em;
-    }
-  }
 }
 
 .closeButton {

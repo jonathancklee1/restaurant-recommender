@@ -20,9 +20,7 @@ export function restaurantReducer(
   switch (action[0]) {
     case "ADD_RESTAURANT": {
       //["ADD_RESTAURANT", {}]
-      const updatedItems = [...state, action[1]];
-      console.log(updatedItems, "Added restaurant");
-      return updatedItems;
+      return [...state, action[1]];
     }
     case "REMOVE_RESTAURANT": {
       //["REMOVE_RESTAURANT", "id"]

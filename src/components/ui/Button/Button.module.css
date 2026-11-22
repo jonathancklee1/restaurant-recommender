@@ -1,5 +1,8 @@
 .button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
   box-sizing: border-box;
   padding: 10px 20px;
   background-color: var(--primary);

@@ -91,3 +91,12 @@ li {
 main {
   position: relative;
 }
+
+/* Desktop fills the screen so the table can take the leftover height and scroll. */
+@media (min-width: 765px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+}

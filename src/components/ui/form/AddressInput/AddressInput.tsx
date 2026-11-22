@@ -1,4 +1,5 @@
-import { startTransition, useActionState, useState } from "react";
+import { startTransition, useActionState, useEffect, useRef, useState } from "react";
+import { MapPin } from "lucide-react";
 import styles from "./AddressInput.module.css";
 import Button from "../../Button/Button";
 import Input from "../Input/Input";
@@ -23,9 +24,20 @@ export const AddressInput = ({
     [],
   );
   const [openDropdown, setOpenDropDown] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close the dropdown when the user presses anywhere outside this field.
+  useEffect(() => {
+    if (!openDropdown) return;
+    function handlePointerDown(event: PointerEvent) {
+      if (!containerRef.current?.contains(event.target as Node)) setOpenDropDown(false);
+    }
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [openDropdown]);
 
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div ref={containerRef} className={`${styles.container} ${className}`}>
       <Input
         className={styles.input}
         type="text"
@@ -72,7 +84,7 @@ export const AddressInput = ({
           setOpenDropDown(true);
         }}
       >
-        Add Map Pin
+        <MapPin size={18} /> Add Map Pin
       </Button>
     </div>
   );

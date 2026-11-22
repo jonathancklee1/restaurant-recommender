@@ -15,7 +15,6 @@ export const VisitsCounter = ({ className = "", visitId }: VisitsCounterProps) =
   const { state, dispatch } = useContext(RestaurantContext);
   const restaurant = state.find((restaurant) => restaurant.id === visitId);
   function handleAddVisit() {
-    console.log(restaurant);
     dispatch([
       "UPDATE_RESTAURANT",
       visitId,

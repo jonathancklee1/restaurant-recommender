@@ -5,13 +5,21 @@ export interface FilterPillProps {
   children?: React.ReactNode;
   className?: string;
   selected?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
-export const FilterPill = ({ children, className = "", selected, onClick }: FilterPillProps) => {
+export const FilterPill = ({
+  children,
+  className = "",
+  selected,
+  disabled,
+  onClick,
+}: FilterPillProps) => {
   return (
     <button
       type="button"
+      disabled={disabled}
       onClick={onClick}
       className={`${styles.container} ${selected ? styles.primary : styles.secondary} ${className}`}
     >

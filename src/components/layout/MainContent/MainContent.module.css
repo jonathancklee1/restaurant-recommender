@@ -1,8 +1,19 @@
 @media (min-width: 765px) {
   .container {
     display: flex;
+    flex-direction: column;
+    gap: 1em;
     align-items: flex-start;
     padding-bottom: 2em;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .tableAndMapContainer {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    min-height: 0;
   }
 
   .table {

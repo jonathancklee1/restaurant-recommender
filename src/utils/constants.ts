@@ -36,7 +36,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "1",
     name: "Golden Lotus",
-    imageUrl: "https://picsum.photos/seed/golden-lotus/400/400",
     cuisine: "Cantonese",
     address: "12 Dixon St, Haymarket NSW 2000",
     rating: 4,
@@ -51,7 +50,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "2",
     name: "Golden Bao Bar",
-    imageUrl: "https://picsum.photos/seed/golden-bao/400/400",
     cuisine: "Cantonese",
     address: "5 Hunter St, Hornsby NSW 2077",
     latLong: [-33.6992, 151.1015],
@@ -66,7 +64,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "3",
     name: "Nonna Rosa",
-    imageUrl: "https://picsum.photos/seed/nonna-rosa/400/400",
     cuisine: "Italian",
     address: "130 Norton St, Leichhardt NSW 2040",
     latLong: [-33.8827, 151.1567],
@@ -81,7 +78,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "4",
     name: "Pizza Fritta",
-    imageUrl: "https://picsum.photos/seed/pizza-fritta/400/400",
     cuisine: "Italian",
     address: "22 Marrickville Rd, Marrickville NSW 2204",
     latLong: [-33.9111, 151.1576],
@@ -93,7 +89,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "5",
     name: "Hanami Izakaya",
-    imageUrl: "https://picsum.photos/seed/hanami-izakaya/400/400",
     cuisine: "Japanese",
     address: "210 Crown St, Surry Hills NSW 2010",
     latLong: [-33.8906, 151.213],
@@ -106,7 +101,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "6",
     name: "Sushi Kaito",
-    imageUrl: "https://picsum.photos/seed/sushi-kaito/400/400",
     cuisine: "Japanese",
     address: "1 Macquarie St, Sydney NSW 2000",
     latLong: [-33.8592, 151.2132],
@@ -121,7 +115,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "7",
     name: "Saigon Corner",
-    imageUrl: "https://picsum.photos/seed/saigon-corner/400/400",
     cuisine: "Vietnamese",
     address: "8 John St, Cabramatta NSW 2166",
     latLong: [-33.8955, 150.9376],
@@ -136,7 +129,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "8",
     name: "Little Seoul BBQ",
-    imageUrl: "https://picsum.photos/seed/little-seoul/400/400",
     cuisine: "Korean",
     address: "15 The Boulevarde, Strathfield NSW 2135",
     latLong: [-33.8734, 151.0942],
@@ -151,7 +143,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "9",
     name: "Taqueria Sol",
-    imageUrl: "https://picsum.photos/seed/taqueria-sol/400/400",
     cuisine: "Mexican",
     address: "301 King St, Newtown NSW 2042",
     latLong: [-33.9006, 151.1783],
@@ -166,7 +157,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "10",
     name: "Spice Route",
-    imageUrl: "https://picsum.photos/seed/spice-route/400/400",
     cuisine: "Indian",
     address: "88 Wigram St, Harris Park NSW 2150",
     latLong: [-33.8226, 151.009],
@@ -181,7 +171,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "11",
     name: "Kopi Lane",
-    imageUrl: "https://picsum.photos/seed/kopi-lane/400/400",
     cuisine: "Malaysian",
     address: "45 Pitt St, Sydney NSW 2000",
     latLong: [-33.8653, 151.2087],
@@ -196,7 +185,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "12",
     name: "Ember & Salt",
-    imageUrl: "https://picsum.photos/seed/ember-salt/400/400",
     cuisine: "Modern Australian",
     address: "33 Barangaroo Ave, Barangaroo NSW 2000",
     latLong: [-33.8654, 151.2014],
@@ -208,7 +196,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "13",
     name: "Baan Thai Kitchen",
-    imageUrl: "https://picsum.photos/seed/baan-thai/400/400",
     cuisine: "Thai",
     address: "60 Campbell St, Haymarket NSW 2000",
     latLong: [-33.8797, 151.2087],
@@ -223,7 +210,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "14",
     name: "Le Petit Bistro",
-    imageUrl: "https://picsum.photos/seed/petit-bistro/400/400",
     cuisine: "French",
     address: "9 Oxford St, Paddington NSW 2021",
     latLong: [-33.8897, 151.2335],
@@ -236,7 +222,6 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
   {
     id: "15",
     name: "Olympia Taverna",
-    imageUrl: "https://picsum.photos/seed/olympia/400/400",
     cuisine: "Greek",
     address: "190 Parramatta Rd, Stanmore NSW 2048",
     latLong: [-33.8881, 151.167],
@@ -261,3 +246,5 @@ export const INITIAL_RESTAURANTS: RestaurantType[] = [
 
 /** Matches the 765px desktop breakpoint used in the CSS. */
 export const DESKTOP_QUERY = "(min-width: 765px)";
+
+export const randomiserModalId = "randomiser-modal";

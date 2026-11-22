@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background: var(--background-secondary);
+  border-radius: var(--border-radius);
+  padding: 1em;
+  margin: 0 1rem;
+  margin-top: 1rem;
+  align-self: stretch;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+}
+.constraintsContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+  > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  &.collapsed {
+    grid-template-rows: 0fr;
+  }
+  p {
+    margin-top: 1em;
+    color: var(--primary);
+  }
+}
+.locationPill {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.randomiserContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.title {
+  display: none;
+}
+
+@media (min-width: 765px) {
+  .container {
+    flex-direction: row;
+    align-items: start;
+    gap: 1em;
+  }
+  .toggleButton {
+    display: none;
+  }
+  .randomiserContent {
+    flex-direction: row;
+    flex-wrap: wrap;
+    > p {
+      display: none;
+    }
+  }
+  .header {
+    order: 2;
+  }
+  .title {
+    display: block;
+    font-weight: bold;
+    text-wrap: nowrap;
+    font-size: 1.25rem;
+  }
+}

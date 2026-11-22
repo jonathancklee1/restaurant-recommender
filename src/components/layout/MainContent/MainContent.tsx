@@ -4,6 +4,7 @@ import DesktopMapContainer from "../DesktopMapContainer/DesktopMapContainer";
 import MobileSideDrawer from "../MobileSideDrawer/MobileSideDrawer";
 import { useMediaQuery } from "../../../utils/hooks/useMediaQuery";
 import { DESKTOP_QUERY } from "../../../utils/constants";
+import RandomiserContainer from "../RandomiserContainer/RandomiserContainer";
 
 export interface MainContentProps {
   className?: string;
@@ -15,8 +16,11 @@ export const MainContent = ({ className = "" }: MainContentProps) => {
 
   return (
     <div className={`${styles.container} ${className}`}>
-      <TableContainer className={styles.table} />
-      {isDesktop ? <DesktopMapContainer /> : <MobileSideDrawer />}
+      <RandomiserContainer />
+      <div className={styles.tableAndMapContainer}>
+        <TableContainer className={styles.table} />
+        {isDesktop ? <DesktopMapContainer /> : <MobileSideDrawer />}
+      </div>
     </div>
   );
 };

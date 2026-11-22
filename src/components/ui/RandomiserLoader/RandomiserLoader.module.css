@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  text-align: center;
+}
+
+.dice {
+  color: var(--primary);
+  animation: tumble 0.8s ease-in-out infinite;
+}
+
+/* Drum look: darker at the top and bottom edges, like a curved slot reel. */
+.reel {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 3.5rem;
+  overflow: hidden;
+  border-block: 3px solid var(--primary);
+  border-radius: var(--border-radius);
+  background: linear-gradient(
+    var(--background-accent),
+    var(--background-secondary) 30%,
+    var(--background-secondary) 70%,
+    var(--background-accent)
+  );
+}
+
+.reelName {
+  max-width: 100%;
+  padding-inline: 1rem;
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  animation: spin-in 90ms ease-out;
+}
+
+.quip {
+  font-style: italic;
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes tumble {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes spin-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dice,
+  .reelName,
+  .quip {
+    animation: none;
+  }
+}

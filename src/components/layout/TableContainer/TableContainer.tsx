@@ -4,7 +4,7 @@ import Table from "../../ui/table/Table/Table";
 import MobileList from "../../ui/table/MobileList/MobileList";
 import TableFilters from "../TableFilters/TableFilters";
 import { RestaurantContext } from "../../../context/RestaurantProvider";
-import Modal from "../../ui/Modal/Modal";
+import RestaurantModal from "../../ui/RestaurantModal/RestaurantModal";
 import { SelectedRestaurantContext } from "../../../context/SelectedRestaurantProvider";
 import type { RestaurantFilters } from "../../../utils/types";
 import { EMPTY_FILTERS } from "../../../utils/constants";
@@ -38,7 +38,7 @@ export const TableContainer = ({ className = "" }: TableContainerProps) => {
       <div className={`${styles.mobileList} ${isStale ? styles.stale : ""}`}>
         <MobileList restaurants={state} deferredFilters={deferredFilters} />
       </div>
-      <Modal initialPlace={selectedRestaurant} />
+      <RestaurantModal initialPlace={selectedRestaurant} />
     </div>
   );
 };
