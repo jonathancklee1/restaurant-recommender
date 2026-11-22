@@ -10,6 +10,7 @@ import { randomiserModalId } from "../../../utils/constants";
 import type { RestaurantType } from "../../../utils/types";
 import RandomiserLoader from "../RandomiserLoader/RandomiserLoader";
 import { getGoogleMapsUrl } from "../../../utils/helpers/getGoogleMapsUrl";
+import Map from "../../Map/Map";
 
 export interface RandomiserModalProps {
   className?: string;
@@ -26,11 +27,6 @@ export const RandomiserModal = ({
   isLoading,
   candidateNames,
 }: RandomiserModalProps) => {
-  for (const [key, value] of Object.entries(constraints)) {
-    console.log(`${key}: ${value}`);
-  }
-  console.log(randomRestaurant);
-
   return (
     <Modal id={randomiserModalId} className={`${styles.container} ${className}`}>
       <div className={styles.modalContent}>
@@ -85,7 +81,7 @@ const NoMatch = ({ constraints }: { constraints: ConstraintType }) => {
 };
 
 const RestaurantDetails = ({ restaurant }: { restaurant: RestaurantType }) => {
-  const { name, imageUrl, cuisine, price, rating, visits, address, lastVisitedAt, comments } =
+  const { name, cuisine, price, rating, visits, address, latLong, lastVisitedAt, comments } =
     restaurant;
   const subtitle = [cuisine, price].filter(Boolean).join(" • ");
   const hasVisited = visits !== undefined && visits > 0;
@@ -93,7 +89,7 @@ const RestaurantDetails = ({ restaurant }: { restaurant: RestaurantType }) => {
   return (
     <>
       <p className={styles.eyebrow}>Tonight you're eating at</p>
-      {imageUrl && <img src={imageUrl} alt={name} className={styles.image} />}
+      {latLong && <Map address={address ?? null} latLong={latLong} className={styles.map} />}
       <div>
         <h3>{name}</h3>
         {subtitle && (

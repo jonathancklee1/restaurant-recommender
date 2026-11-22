@@ -19,7 +19,6 @@ export type LatLong = [lat: number, lng: number];
 export interface RestaurantType {
   id: string;
   name: string;
-  imageUrl?: string;
   cuisine?: string;
   rating?: Rating; // 1-5
   price?: PriceRangeType;

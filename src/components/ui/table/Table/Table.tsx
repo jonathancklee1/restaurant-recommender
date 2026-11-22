@@ -63,8 +63,6 @@ export const Table = memo(function Table({
               <td className={styles.nameCell}>
                 <div className={styles.name}>
                   <FavouriteButton restaurant={restaurant} />
-                  {restaurant.imageUrl && <img src={restaurant.imageUrl} alt={restaurant.name} />}
-
                   <span>{restaurant.name}</span>
                 </div>
               </td>

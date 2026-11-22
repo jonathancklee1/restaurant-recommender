@@ -20,19 +20,13 @@ export interface CardProps {
 }
 
 export const Card = ({ className = "", restaurant }: CardProps) => {
-  const { name, imageUrl, cuisine, address, rating, price, visits, comments } = restaurant;
+  const { name, cuisine, address, rating, price, visits, comments } = restaurant;
   const [isCommentVisible, setCommentVisible] = useState(false);
 
   const { setSelectedRestaurant } = useContext(SelectedRestaurantContext);
   const { showOnMap } = useContext(RestaurantMapActionsContext);
   return (
     <div className={`${styles.container} ${className}`}>
-      {imageUrl ? (
-        <img src={imageUrl} loading="lazy" alt={name} className={styles.restaurantImage} />
-      ) : (
-        <div className={styles.emptyImage}></div>
-      )}
-
       <div className={styles.content}>
         <div className={styles.detailsContainer}>
           <div>

@@ -13,18 +13,16 @@
   border-top: 3px solid var(--primary);
 }
 
+.modalContent .map {
+  flex-shrink: 0;
+  height: 14rem;
+}
+
 .eyebrow {
   font-size: 0.85rem;
   font-weight: bold;
   text-transform: uppercase;
   color: var(--primary);
-}
-
-.image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 8px;
 }
 
 .subtitle {

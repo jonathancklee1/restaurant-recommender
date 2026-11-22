@@ -10,7 +10,7 @@ import type { PriceRangeType, VisitStatusType } from "../../../utils/types";
 import RandomiserModal from "../../ui/RandomiserModal/RandomiserModal";
 import { useGetRandomRestaurant } from "../../../utils/hooks/useGetRandomRestaurant";
 import { getLocation } from "../../../utils/helpers/getLocation";
-
+import { ToastContainer, toast } from "react-toastify";
 export interface RandomiserContainerProps {
   className?: string;
 }
@@ -47,7 +47,6 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
   function resetConstraints() {
     setConstraints(initialConstraintState);
   }
-  console.log(constraints);
 
   const { getRandomRestaurant, randomRestaurant, filteredRestaurants } =
     useGetRandomRestaurant(constraints);
@@ -67,6 +66,9 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
     try {
       const position = await getLocation();
       setConstraints((prev) => ({ ...prev, location: position }));
+    } catch {
+      toast.error("Error getting location, please enable location services in your browser.");
+      console.error("Error getting location");
     } finally {
       setIsLocating(false);
     }
@@ -141,6 +143,18 @@ export const RandomiserContainer = ({ className = "" }: RandomiserContainerProps
             constraint={constraints.scope}
           />
         </div>
+        <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
       <RandomiserModal
         constraints={constraints}

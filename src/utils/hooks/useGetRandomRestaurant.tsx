@@ -7,12 +7,11 @@ import { getDistanceKm } from "../helpers/getDistanceKm";
 export function useGetRandomRestaurant(constraints: ConstraintType) {
   const { state } = useContext(RestaurantContext);
   const [randomRestaurant, setRandomRestaurant] = useState<RestaurantType>();
-  console.log(state);
 
   function filterScope(visits: number | undefined) {
     if (visits && visits > 0 && constraints.scope === "Visited") {
       return true;
-    } else if (visits && visits === 0 && constraints.scope === "Want to Eat") {
+    } else if (visits === 0 && constraints.scope === "Want to Eat") {
       return true;
     } else if (constraints.scope === null) {
       return true;
@@ -31,6 +30,9 @@ export function useGetRandomRestaurant(constraints: ConstraintType) {
         break;
       case "$$$":
         if (price == "$$$" || price == "$$" || price == "$") return true;
+        break;
+      case "$$$$":
+        if (price == "$$$$" || price == "$$$" || price == "$$" || price == "$") return true;
         break;
       case null:
         return true;

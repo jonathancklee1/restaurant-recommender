@@ -137,14 +137,6 @@
   line-clamp: 2;
   overflow: hidden;
   gap: 0.5em;
-  img {
-    display: inline;
-    width: 3em;
-    height: 3em;
-    aspect-ratio: square;
-    border-radius: 8px;
-    margin-right: 0.5em;
-  }
   button {
     flex-shrink: 0;
   }

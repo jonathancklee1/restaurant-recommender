@@ -18,7 +18,6 @@ export interface RestaurantFormProps {
 const createEmptyRestaurant = (): RestaurantType => ({
   id: crypto.randomUUID(),
   name: "",
-  imageUrl: "",
   cuisine: "",
   rating: undefined,
   price: "$",
